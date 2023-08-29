@@ -1,0 +1,14 @@
+﻿@model IEnumerable<FoodiApp.Models.DTOs.FoodCategoryDTO>
+@{
+	ViewData["Title"] = "Food Category Page";
+}
+
+<ul>
+	@foreach (var category in Model)
+	{
+		<li>
+			<a>@category.Name</a>
+		</li>
+	}
+
+</ul>
