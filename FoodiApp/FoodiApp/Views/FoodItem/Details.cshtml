@@ -1,0 +1,6 @@
+﻿@model IEnumerable<FoodItem>
+
+    @foreach(var foodItem in Model){
+
+    <h2><a asp-controller="FoodItem" asp-action="ItemDetails" asp-route-id="@foodItem.FoodItemId">@foodItem.Name</a></h2>
+    }

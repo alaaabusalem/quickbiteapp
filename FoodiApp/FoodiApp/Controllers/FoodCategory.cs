@@ -17,5 +17,6 @@ namespace FoodiApp.Controllers
 			return View(foodCategories);
 
 		}
-	}
+       
+    }
 }
