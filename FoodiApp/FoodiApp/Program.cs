@@ -18,6 +18,9 @@ builder.Services
 
 builder.Services.AddTransient<IFoodCategory, FoodCategoryService>();
 
+builder.Services.AddTransient<IFoodItems, FoodItemService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
