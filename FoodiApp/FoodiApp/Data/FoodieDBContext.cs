@@ -46,8 +46,17 @@ namespace FoodiApp.Data
 	 Description = "a rice dish Serve with chicken and salad ",
 	 Price = 7,
 	 IsAvaliabe = true,
+ },
+ new FoodItem
+ {
+     FoodItemId = 4,
+     FoodCategoryId = 3,
+     Name = "CupCake",
+     Description = "A small stuffy cake ",
+     Price = 7,
+     IsAvaliabe = false,
  }
-	 );
+     );
 		}
 
 		public DbSet<FoodCategory> FoodCategories { get; set; }

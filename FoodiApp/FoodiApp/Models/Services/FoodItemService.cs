@@ -27,7 +27,7 @@ namespace FoodiApp.Models.Services
 
         public FoodItem  GetFoodItemDetails(int foodItemId)
         {
-            var FIDetails = _context.FoodItems.FirstOrDefault(fid => fid.FoodItemId == foodItemId);
+            var FIDetails = _context.FoodItems.Include(f=> f.foodCategory).FirstOrDefault(fid => fid.FoodItemId == foodItemId);
             return FIDetails;
         }
     }

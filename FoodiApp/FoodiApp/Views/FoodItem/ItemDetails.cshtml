@@ -1,8 +1,74 @@
 ﻿@model FoodItem
 
-<h1>Food Category ID: @Model.FoodCategoryId</h1>
-<h2>Food Item ID : @Model.FoodItemId</h2>
-<h2>Name : @Model.Name</h2>
-<h3>Description : @Model.Description</h3>
-<h3>Price = @Model.Price $</h3>
-<h3>Availability : @Model.IsAvaliabe</h3>
+<style>
+    .food-item-card {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .food-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .food-item-details {
+        padding: 15px;
+    }
+
+    .food-category-name {
+        font-size: 1rem;
+        color: #007bff;
+    }
+
+    .food-item-name {
+        font-size: 1.5rem;
+        margin: 10px 0 0;
+    }
+
+    .food-item-price {
+        font-size: 1.25rem;
+        color: #28a745;
+    }
+
+    .food-item-description {
+        margin-top: 10px;
+    }
+
+    .availability-box {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .availability-true {
+        background-color: #28a745;
+    }
+
+    .availability-false {
+        background-color: #dc3545;
+    }
+
+    .food-item-image {
+        width: 250px;
+        height: 250px;
+    }
+</style>
+
+<div class="row my-5 mb-6">
+    <div class="col-md-12">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative food-item-card">
+            <div class="col px-4 p-5 d-flex flex-column position-static food-item-details">
+                <strong class="d-inline-block mb-2 text-primary-emphasis food-category-name">Food category Name: @Model.foodCategory.Name</strong>
+                <h3 class="mb-0 food-item-name">Name: @Model.Name</h3>
+                <div class="mb-1 food-item-price">Price = @Model.Price $</div>
+                <div class="availability-box @((Model.IsAvaliabe) ? "availability-true" : "availability-false")"></div>
+                <span class="food-item-availability">@((Model.IsAvaliabe) ? "Available" : "Not Available")</span>
+                <p class="card-text mb-auto food-item-description">Description: @Model.Description</p>
+            </div>
+            <div class="col-auto py-4 mx-4 d-none d-lg-block">
+                <img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Thumbnail" class="food-item-image">
+            </div>
+        </div>
+    </div>
+</div>
