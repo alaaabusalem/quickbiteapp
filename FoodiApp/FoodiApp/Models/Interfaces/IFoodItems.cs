@@ -2,12 +2,14 @@
 
 namespace FoodiApp.Models.Interfaces
 {
-    public interface IFoodItems
-    {
-        IEnumerable<FoodItem> GetAllFoodItems();
+	public interface IFoodItems
+	{
+		Task<CreatFoodItemDTO> Create(CreatFoodItemDTO creatFoodItemDTO);
 
-        IEnumerable<FoodItem> GetFoodItem(int categoryId);
+		IEnumerable<FoodItem> GetAllFoodItems();
 
-        FoodItem GetFoodItemDetails(int foodItemId);
-    }
+		IEnumerable<FoodItem> GetFoodItem(int categoryId);
+
+		FoodItem GetFoodItemDetails(int foodItemId);
+	}
 }

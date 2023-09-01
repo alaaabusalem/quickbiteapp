@@ -8,7 +8,7 @@
 
 		//NP
 
-		public List<FoodItem> foodItems { get; set; }
+		public List<FoodItem>? foodItems { get; set; }
 
 	}
 }

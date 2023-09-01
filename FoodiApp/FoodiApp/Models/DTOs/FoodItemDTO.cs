@@ -1,6 +1,10 @@
-﻿namespace FoodiApp.Models
+﻿namespace FoodiApp.Models.DTOs
 {
-	public class FoodItem
+	public class FoodItemDTO
+	{
+	}
+
+	public class CreatFoodItemDTO
 	{
 		public int FoodItemId { get; set; }
 
@@ -12,7 +16,5 @@
 		public double Price { get; set; }
 		public bool IsAvaliabe { get; set; }
 
-		//NP
-		public FoodCategory? foodCategory { get; set; }
 	}
 }

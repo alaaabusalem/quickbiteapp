@@ -1,22 +1,68 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.form-body {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(64, 0, 128,0.2);
+    border-radius: 1px;
+    padding: 20px
+}
+
+.form-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-group-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 90px;
+}
+
+.form-header-style {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px
+}
+
+.lable-div-style {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-bottom: 10px
+}
+
+.lable-style {
+    font-weight: bold;
+}
+
+.lable-checkbox-style {
+    margin-left: 10px;
 }
