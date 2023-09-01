@@ -1,14 +1,61 @@
 ﻿@model IEnumerable<FoodiApp.Models.DTOs.FoodCategoryDTO>
 @{
-	ViewData["Title"] = "Food Category Page";
+    ViewData["Title"] = "Food Category Page";
 }
 
-<ul>
-	@foreach (var category in Model)
-	{
-		<li>
-			<a asp-controller="FoodItem" asp-action="Details" asp-route-id="@category.FoodCategoryId">@category.Name</a>
-		</li>
-	}
+<style>
+    .category-card {
+        transition: transform 0.3s ease-in-out;
+    }
 
-</ul>
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .category-name {
+        font-family: 'Bahnschrift', sans-serif;
+        font-size: 1.25rem;
+        text-align: center;
+        transition: color 0.3s ease-in-out;
+    }
+
+        .category-name:hover {
+            color: #BEADFA;
+        }
+
+    .btn-group {
+        margin-top: 15px;
+    }
+
+        .btn-group .btn {
+            margin-right: 10px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.9rem;
+        }
+</style>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var category in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm category-card">
+                        <img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text category-name">@category.Name</p>
+                            <div class="d-flex justify-content-between align-items-center btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <a class="nav-link" asp-controller="FoodItem" asp-action="Details" asp-route-id="@category.FoodCategoryId">View</a>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
