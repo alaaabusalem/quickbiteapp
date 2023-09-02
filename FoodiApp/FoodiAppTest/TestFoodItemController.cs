@@ -89,5 +89,39 @@ namespace FoodiAppTest
 			Assert.IsType<RedirectToActionResult>(result);
 
 		}
+
+		[Fact]
+		public async void TestGetItemDetailsController()
+		{
+			var foodItemService = new FoodItemService(_db);
+			var foodCategoryService = new FoodCategoryService(_db);
+			FoodItemController foodItemController = new FoodItemController(foodItemService, foodCategoryService);
+			//var creatFoodItemDTO = new CreatFoodItemDTO();
+			var result = await foodItemController.ItemDetails(1) as ViewResult;
+			Assert.IsType<ViewResult>(result);
+
+		}
+		[Fact]
+		public async void TestGetDetailsController()
+		{
+			var foodItemService = new FoodItemService(_db);
+			var foodCategoryService = new FoodCategoryService(_db);
+			FoodItemController foodItemController = new FoodItemController(foodItemService, foodCategoryService);
+			//var creatFoodItemDTO = new CreatFoodItemDTO();
+			var result = foodItemController.Details(1) as ViewResult;
+			Assert.IsType<ViewResult>(result);
+
+		}
+		[Fact]
+		public async void TestGetIndexController()
+		{
+			var foodItemService = new FoodItemService(_db);
+			var foodCategoryService = new FoodCategoryService(_db);
+			FoodItemController foodItemController = new FoodItemController(foodItemService, foodCategoryService);
+			//var creatFoodItemDTO = new CreatFoodItemDTO();
+			var result = foodItemController.Index() as ViewResult;
+			Assert.IsType<ViewResult>(result);
+
+		}
 	}
 }
