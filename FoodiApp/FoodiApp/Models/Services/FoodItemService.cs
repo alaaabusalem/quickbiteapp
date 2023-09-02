@@ -36,6 +36,16 @@ namespace FoodiApp.Models.Services
 			return null;
 		}
 
+		public async Task Delete(int foodItemId)
+		{
+			var foodItem = await _context.FoodItems.FindAsync(foodItemId);
+			if (foodItem != null)
+			{
+				_context.FoodItems.Remove(foodItem);
+				await _context.SaveChangesAsync();
+			}
+		}
+
 		public IEnumerable<FoodItem> GetAllFoodItems()
 		{
 			var foodItems = _context.FoodItems;

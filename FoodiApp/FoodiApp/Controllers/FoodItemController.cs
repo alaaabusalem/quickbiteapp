@@ -46,7 +46,16 @@ namespace FoodiApp.Controllers
 		public async Task<IActionResult> Creat(CreatFoodItemDTO creatFoodItemDTO)
 		{
 			var foodItem = await _context.Create(creatFoodItemDTO);
-			return Content("The Item is added");
+			return RedirectToAction("Details", new { id = creatFoodItemDTO.FoodCategoryId });
+
 		}
+
+
+		public async Task<IActionResult> Delet(int foodItemId, int categoryId)
+		{
+			await _context.Delete(foodItemId);
+			return RedirectToAction("Details", new { id = categoryId });
+		}
+
 	}
 }

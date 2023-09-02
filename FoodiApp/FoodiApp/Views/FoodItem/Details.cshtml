@@ -1,60 +1,60 @@
 ﻿@model IEnumerable<FoodItem>
 
- 
+
 <style>
-    .category-card {
-        transition: transform 0.3s ease-in-out;
-    }
+	.category-card {
+		transition: transform 0.3s ease-in-out;
+	}
 
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+		.category-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-    .category-name {
-        font-family: 'Bahnschrift', sans-serif;
-        font-size: 1.25rem;
-        text-align: center;
-        transition: color 0.3s ease-in-out;
-    }
+	.category-name {
+		font-family: 'Bahnschrift', sans-serif;
+		font-size: 1.25rem;
+		text-align: center;
+		transition: color 0.3s ease-in-out;
+	}
 
-        .category-name:hover {
-            color: #BEADFA;
-        }
+		.category-name:hover {
+			color: #BEADFA;
+		}
 
-    .btn-group {
-        margin-top: 15px;
-    }
+	.btn-group {
+		margin-top: 15px;
+	}
 
-        .btn-group .btn {
-            margin-right: 10px;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.9rem;
-        }
+		.btn-group .btn {
+			margin-right: 10px;
+			padding: 0.2rem 0.5rem;
+			font-size: 0.9rem;
+		}
 </style>
 
 <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @foreach(var foodItem in Model)
-            {
-                <div class="col">
-                    <div class="card shadow-sm category-card">
-                        <img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text category-name">@foodItem.Name</p>
-                            <p class="card-text category-name">Price = @foodItem.Price $</p>
-                            <div class="d-flex justify-content-between align-items-center btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    <a class="nav-link" asp-controller="FoodItem" asp-action="ItemDetails" asp-route-id="@foodItem.FoodItemId">Details</a>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+	<div class="container">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+			@foreach (var foodItem in Model)
+			{
+				<div class="col">
+					<div class="card shadow-sm category-card">
+						<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
+						<div class="card-body">
+							<p class="card-text category-name">@foodItem.Name</p>
+							<p class="card-text category-name">Price = @foodItem.Price $</p>
+							<div class="d-flex justify-content-between align-items-center btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary">
+									<a class="nav-link" asp-controller="FoodItem" asp-action="ItemDetails" asp-route-id="@foodItem.FoodItemId">Details</a>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link " asp-controller="FoodItem" asp-action="Delet" asp-route-foodItemId="@foodItem.FoodItemId" asp-route-categoryId="@foodItem.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Item')">Delete</a></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 </div>

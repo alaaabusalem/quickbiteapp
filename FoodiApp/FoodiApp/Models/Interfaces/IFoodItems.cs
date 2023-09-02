@@ -11,5 +11,6 @@ namespace FoodiApp.Models.Interfaces
 		IEnumerable<FoodItem> GetFoodItem(int categoryId);
 
 		FoodItem GetFoodItemDetails(int foodItemId);
+		Task Delete(int foodItemId);
 	}
 }
