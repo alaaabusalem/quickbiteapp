@@ -4,11 +4,11 @@ namespace FoodiApp.Models.Interfaces
 {
 	public interface IFoodCategory
 	{
-		Task<FoodCategoryDTO> Create(CreatFoodCategoryDTO creatFoodCategoryDTO);
+		FoodCategory Create(CreatFoodCategoryDTO creatFoodCategoryDTO);
 
 		Task<List<FoodCategoryDTO>> GetFoodCategories();
-		Task<FoodCategoryDTO> GetFoodCategory(int foodCategoryId);
-		Task<FoodCategoryDTO> Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId);
-		Task Delete(int foodCategoryId);
+		FoodCategory GetFoodCategory(int foodCategoryId);
+		CreatFoodCategoryDTO Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId);
+		void Delete(int foodCategoryId);
 	}
 }

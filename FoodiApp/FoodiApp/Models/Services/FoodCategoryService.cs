@@ -12,14 +12,22 @@ namespace FoodiApp.Models.Services
 		{
 			_DB = DB;
 		}
-		public Task<FoodCategoryDTO> Create(CreatFoodCategoryDTO creatFoodCategoryDTO)
+		public FoodCategory Create(CreatFoodCategoryDTO creatFoodCategoryDTO)
 		{
-			throw new NotImplementedException();
+			var foodCategory = new FoodCategory()
+			{
+				Name = creatFoodCategoryDTO.Name,
+			};
+			_DB.FoodCategories.Add(foodCategory);
+			_DB.SaveChanges();
+			return foodCategory;
 		}
 
-		public Task Delete(int foodCategoryId)
+		public void  Delete(int foodCategoryId)
 		{
-			throw new NotImplementedException();
+			var foodCategory = _DB.FoodCategories.Where(fc => fc.FoodCategoryId == foodCategoryId).FirstOrDefault();
+			_DB.FoodCategories.Remove(foodCategory);
+			_DB.SaveChanges();
 		}
 
 		public async Task<List<FoodCategoryDTO>> GetFoodCategories()
@@ -35,14 +43,22 @@ namespace FoodiApp.Models.Services
 
 		}
 
-		public Task<FoodCategoryDTO> GetFoodCategory(int foodCategoryId)
+		public FoodCategory GetFoodCategory(int foodCategoryId)
 		{
-			throw new NotImplementedException();
+			var foodCategory = _DB.FoodCategories.Where(fc => fc.FoodCategoryId == foodCategoryId).FirstOrDefault();
+
+			
+			return foodCategory;
 		}
 
-		public Task<FoodCategoryDTO> Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId)
+		public CreatFoodCategoryDTO Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId)
 		{
-			throw new NotImplementedException();
+			var foodCategory = _DB.FoodCategories.Where(fc => fc.FoodCategoryId == foodCategoryId).FirstOrDefault();
+
+			foodCategory.Name = creatFoodCategoryDTO.Name;
+
+			_DB.SaveChanges();
+			return creatFoodCategoryDTO;
 		}
 	}
 }

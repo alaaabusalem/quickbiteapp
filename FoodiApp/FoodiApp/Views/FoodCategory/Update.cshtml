@@ -1,0 +1,21 @@
+﻿@model FoodCategory
+
+
+<div class="form-header-style">
+	<h3>Edit Food Category</h3>
+</div>
+<form asp-controller="FoodCategory" asp-action="Update" method="post" class="form-body">
+
+
+	<div class="form-flex">
+		<div class="form-group form-group-style">
+			<lable class=" controle-lable lable-style"> Name</lable>
+			<input type="text" asp-for="@Model.Name" class="form-control">
+			<span asp-validation-for="@Model.Name" class="text-danger"></span>
+		</div>
+	</div>
+
+	<div class="text-center">
+		<button type="submit" class="btn btn-sm btn-outline-secondary mx-auto d-block">Update Category Name</button>
+	</div>
+</form>
