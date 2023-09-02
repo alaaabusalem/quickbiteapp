@@ -48,8 +48,8 @@
 								<button type="button" class="btn btn-sm btn-outline-secondary">
 									<a class="nav-link" asp-controller="FoodItem" asp-action="ItemDetails" asp-route-id="@foodItem.FoodItemId">Details</a>
 								</button>
-								<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link " asp-controller="FoodItem" asp-action="Delet" asp-route-foodItemId="@foodItem.FoodItemId" asp-route-categoryId="@foodItem.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Item')">Delete</a></button>
+								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodItem" asp-action="Update" asp-route-foodItemId="@foodItem.FoodItemId">Edit</a></button>
+								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodItem" asp-action="Delet" asp-route-foodItemId="@foodItem.FoodItemId" asp-route-categoryId="@foodItem.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Item')">Delete</a></button>
 							</div>
 						</div>
 					</div>

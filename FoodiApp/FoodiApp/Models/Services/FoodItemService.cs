@@ -58,11 +58,27 @@ namespace FoodiApp.Models.Services
 			return foodItem;
 		}
 
-		public FoodItem GetFoodItemDetails(int foodItemId)
+		public async Task<FoodItem> GetFoodItemDetails(int foodItemId)
 		{
-			var FIDetails = _context.FoodItems.Include(f => f.foodCategory).FirstOrDefault(fid => fid.FoodItemId == foodItemId);
+			var FIDetails = await _context.FoodItems.Include(f => f.foodCategory).FirstOrDefaultAsync(fid => fid.FoodItemId == foodItemId);
 			return FIDetails;
 		}
 
+		public async Task<CreatFoodItemDTO> Update(CreatFoodItemDTO creatFoodItemDTO)
+		{
+			var foodItem = await _context.FoodItems.FindAsync(creatFoodItemDTO.FoodItemId);
+			if (foodItem != null)
+			{
+				foodItem.Name = creatFoodItemDTO.Name;
+				foodItem.Description = creatFoodItemDTO.Description;
+				foodItem.Price = creatFoodItemDTO.Price;
+				foodItem.FoodCategoryId = creatFoodItemDTO.FoodCategoryId;
+				foodItem.IsAvaliabe = creatFoodItemDTO.IsAvaliabe;
+				_context.Entry(foodItem).State = EntityState.Modified;
+				await _context.SaveChangesAsync();
+				return creatFoodItemDTO;
+			}
+			return null;
+		}
 	}
 }

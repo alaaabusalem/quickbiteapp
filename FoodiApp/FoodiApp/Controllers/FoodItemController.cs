@@ -27,10 +27,10 @@ namespace FoodiApp.Controllers
 			return View(foodItem);
 
 		}
-		public IActionResult ItemDetails(int id)
+		public async Task<IActionResult> ItemDetails(int id)
 		{
 
-			var foodItem = _context.GetFoodItemDetails(id);
+			var foodItem = await _context.GetFoodItemDetails(id);
 			return View(foodItem);
 		}
 
@@ -50,7 +50,32 @@ namespace FoodiApp.Controllers
 
 		}
 
+		public async Task<IActionResult> Update(int foodItemId)
+		{
 
+			var foodItem = await _context.GetFoodItemDetails(foodItemId);
+			ViewBag.Categories = await _FoodCategory.GetFoodCategories();
+
+			var foodItemDTO = new CreatFoodItemDTO()
+			{
+				Name = foodItem.Name,
+				FoodItemId = foodItemId,
+				FoodCategoryId = foodItem.FoodCategoryId,
+				Description = foodItem.Description,
+				Price = foodItem.Price,
+				IsAvaliabe = foodItem.IsAvaliabe,
+			};
+
+			return View(foodItemDTO);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Update(CreatFoodItemDTO creatFoodItemDTO)
+		{
+			var foodItem = await _context.Update(creatFoodItemDTO);
+			return RedirectToAction("ItemDetails", new { id = creatFoodItemDTO.FoodItemId });
+
+		}
 		public async Task<IActionResult> Delet(int foodItemId, int categoryId)
 		{
 			await _context.Delete(foodItemId);
