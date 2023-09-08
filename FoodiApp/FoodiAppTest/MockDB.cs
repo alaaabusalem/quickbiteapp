@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FoodiApp.Data;
+using FoodiApp.Models;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,22 @@ namespace FoodiAppTest
 			_db?.Dispose();
 			_connection?.Dispose();
 		}
+
+		protected FoodCategory CreateAndSaveFoodCategory()
+		{
+			var category = new FoodCategory
+			{
+				Name = " Pasta",
+
+			};
+
+			_db.FoodCategories.Add(category);
+			_db.SaveChanges();
+			Assert.NotEqual(0, category.FoodCategoryId);
+			return category;
+
+		}
+
 
 	}
 }
