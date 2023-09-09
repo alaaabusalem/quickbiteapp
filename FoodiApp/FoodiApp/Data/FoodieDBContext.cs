@@ -1,14 +1,19 @@
 ﻿using FoodiApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodiApp.Data
 {
-	public class FoodieDBContext : DbContext
+	public class FoodieDBContext : IdentityDbContext<ApplicationUser>
 	{
 		public FoodieDBContext(DbContextOptions options) : base(options)
 		{
 
 		}
+
+
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -279,7 +284,63 @@ new FoodItem
 
 
 				);
+
+
+			SeedRole(modelBuilder, "Admin");
+
+			var hasher = new PasswordHasher<ApplicationUser>();
+
+
+			var admin = new ApplicationUser
+			{
+				Id = "1",
+				UserName = "admin",
+				NormalizedUserName = "ADMIN",
+				Email = "admin@example.com",
+				PhoneNumber = "1234567890",
+				NormalizedEmail = "admin@EXAMPLE.COM",
+				EmailConfirmed = true,
+				LockoutEnabled = false
+			};
+			admin.PasswordHash = hasher.HashPassword(admin, "Admin@123");
+			modelBuilder.Entity<ApplicationUser>().HasData(admin);
+			modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+			new IdentityUserRole<string>
+			{
+				RoleId = "admin",
+				UserId = admin.Id
+			});
+
+
+
 		}
+
+
+
+
+		private int nextId = 1;
+		private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+		{
+			var role = new IdentityRole
+			{
+				Id = roleName.ToLower(),
+				Name = roleName,
+				NormalizedName = roleName.ToUpper(),
+				ConcurrencyStamp = Guid.Empty.ToString()
+			};
+			modelBuilder.Entity<IdentityRole>().HasData(role);
+
+			var roleClaims = permissions.Select(permission =>
+			new IdentityRoleClaim<string>
+			{
+				Id = nextId++,
+				RoleId = role.Id,
+				ClaimType = "permissions",
+				ClaimValue = permission
+			}).ToArray();
+			modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(roleClaims);
+		}
+
 
 		public DbSet<FoodCategory> FoodCategories { get; set; }
 		public DbSet<FoodItem> FoodItems { get; set; }

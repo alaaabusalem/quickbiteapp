@@ -1,10 +1,12 @@
 ﻿using FoodiApp.Models;
 using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
 {
+
 	public class FoodItemController : Controller
 	{
 		private readonly IFoodItems _context;
@@ -33,6 +35,7 @@ namespace FoodiApp.Controllers
 			var foodItem = await _context.GetFoodItemDetails(id);
 			return View(foodItem);
 		}
+		[Authorize(Roles = "Admin")]
 
 		public async Task<IActionResult> Creat()
 		{
@@ -43,12 +46,15 @@ namespace FoodiApp.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles ="Admin")]
+
 		public async Task<IActionResult> Creat(CreatFoodItemDTO creatFoodItemDTO)
 		{
 			var foodItem = await _context.Create(creatFoodItemDTO);
 			return RedirectToAction("Details", new { id = creatFoodItemDTO.FoodCategoryId });
 
 		}
+		[Authorize(Roles = "Admin")]
 
 		public async Task<IActionResult> Update(int foodItemId)
 		{
@@ -70,12 +76,16 @@ namespace FoodiApp.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> Update(CreatFoodItemDTO creatFoodItemDTO)
 		{
 			var foodItem = await _context.Update(creatFoodItemDTO);
 			return RedirectToAction("ItemDetails", new { id = creatFoodItemDTO.FoodItemId });
 
 		}
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> Delet(int foodItemId, int categoryId)
 		{
 			await _context.Delete(foodItemId);

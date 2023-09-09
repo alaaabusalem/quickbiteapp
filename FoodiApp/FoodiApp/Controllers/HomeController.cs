@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
 using FoodiApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
 {
+	[Authorize]
 	public class HomeController : Controller
 	{
+
 		private readonly ILogger<HomeController> _logger;
 
 		public HomeController(ILogger<HomeController> logger)
