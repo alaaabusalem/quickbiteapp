@@ -2,6 +2,7 @@ using FoodiApp.Data;
 using FoodiApp.Models;
 using FoodiApp.Models.Interfaces;
 using FoodiApp.Models.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +19,15 @@ builder.Services
 
 builder.Services.AddTransient<IFoodCategory, FoodCategoryService>();
 
+builder.Services.AddTransient<IUser, UserService>();
+
 builder.Services.AddTransient<IFoodItems, FoodItemService>();
 
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>
+	(
+	options => options.User.RequireUniqueEmail = true
+	).AddEntityFrameworkStores<FoodieDBContext>();
 
 var app = builder.Build();
 
