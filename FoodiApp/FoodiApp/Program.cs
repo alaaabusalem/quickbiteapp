@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
 // adding services to Db context
@@ -28,6 +28,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>
 	(
 	options => options.User.RequireUniqueEmail = true
 	).AddEntityFrameworkStores<FoodieDBContext>();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+	options.LoginPath = "/Auth/Login";
+});
 
 var app = builder.Build();
 
@@ -44,6 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
 {
-	
+
 	public class FoodCategory : Controller
 	{
 		private readonly IFoodCategory _foodCategory;
@@ -20,13 +20,13 @@ namespace FoodiApp.Controllers
 			return View(foodCategories);
 
 		}
-		[Authorize(Roles ="Admin")]
-        public IActionResult Delete(int id )
-        {
-           _foodCategory.Delete(id);
+		[Authorize(Roles = "Admin")]
+		public IActionResult Delete(int id)
+		{
+			_foodCategory.Delete(id);
 			return RedirectToAction("Index");
 
-        }
+		}
 		[Authorize(Roles = "Admin")]
 
 		public IActionResult Create()
@@ -50,20 +50,20 @@ namespace FoodiApp.Controllers
 
 		public IActionResult Update(int id)
 		{
-			var fc= _foodCategory.GetFoodCategory(id);
+			var fc = _foodCategory.GetFoodCategory(id);
 			return View(fc);
 		}
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 
-		public IActionResult Update(CreatFoodCategoryDTO foodCategoryDto,int id )
+		public IActionResult Update(CreatFoodCategoryDTO foodCategoryDto, int id)
 		{
 			if (!ModelState.IsValid)
 			{
 				return View(foodCategoryDto);
 			}
 
-			_foodCategory.Update(foodCategoryDto , id);
+			_foodCategory.Update(foodCategoryDto, id);
 			return RedirectToAction("Index");
 		}
 

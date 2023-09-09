@@ -285,7 +285,7 @@ new FoodItem
 
 				);
 
-
+			SeedRole(modelBuilder, "Client");
 			SeedRole(modelBuilder, "Admin");
 
 			var hasher = new PasswordHasher<ApplicationUser>();

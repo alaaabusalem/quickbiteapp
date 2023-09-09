@@ -1,0 +1,38 @@
+﻿@model RegisterUserDto
+
+<div class="form-flex">
+	<div class="form-group form-group-style">
+		<lable class=" controle-lable lable-style"> Name</lable>
+		<input type="text" asp-for="@Model.Name" class="form-control">
+		<span asp-validation-for="@Model.Name" class="text-danger"></span>
+	</div>
+
+</div>
+<div class="form-group form-group-style">
+	<lable class="controle-lable lable-style" asp-for="@Model.Email"> Email</lable>
+	<input type="email" asp-for="@Model.Email" class="form-control">
+	<span asp-validation-for="@Model.Email" class="text-danger"></span>
+</div>
+<div class="form-group form-group-style">
+	<lable class="controle-lable lable-style">Password</lable>
+	<input type="password" asp-for="@Model.Password" class="form-control">
+	<span asp-validation-for="@Model.Password" class="text-danger"></span>
+</div>
+<div class="form-group form-group-style">
+	<lable class="controle-lable lable-style">Confirm Password</lable>
+	<input type="password" asp-for="@Model.ConfirmPassword" class="form-control">
+	<span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+</div>
+<div class="form-group form-group-style">
+	<lable class="controle-lable lable-style">Phone</lable>
+	<input type="text" asp-for="@Model.Phone" class="form-control">
+	<span asp-validation-for="@Model.Phone" class="text-danger"></span>
+</div>
+<div class="form-group form-group-margin form-header-3">
+	<input type="submit" value="Register" class="btn btn-outline-success float-right" />
+</div>
+@section Scripts{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}

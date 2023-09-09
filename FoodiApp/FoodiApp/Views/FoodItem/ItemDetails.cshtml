@@ -62,9 +62,13 @@
 				<strong class="d-inline-block mb-2 text-primary-emphasis food-category-name">Food category Name: @Model.foodCategory.Name</strong>
 				<h3 class="mb-0 food-item-name">Name: @Model.Name</h3>
 				<div class="mb-1 food-item-price">Price = @Model.Price $</div>
-				<div class="availability-box @((Model.IsAvaliabe) ? "availability-true" : "availability-false")"></div>
-				<span class="food-item-availability">@((Model.IsAvaliabe) ? "Available" : "Not Available")</span>
+				@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+				{
+					<div class="availability-box @((Model.IsAvaliabe) ? "availability-true" : "availability-false")"></div>
+					<span class="food-item-availability">@((Model.IsAvaliabe) ? "Available" : "Not Available")</span>
+				}
 				<p class="card-text mb-auto food-item-description">Description: @Model.Description</p>
+
 			</div>
 			<div class="col-auto py-4 mx-4 d-none d-lg-block">
 				<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Thumbnail" class="food-item-image">

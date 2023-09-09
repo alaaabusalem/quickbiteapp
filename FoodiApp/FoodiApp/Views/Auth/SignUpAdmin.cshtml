@@ -1,15 +1,18 @@
 ﻿@model RegisterUserDto
 
 @{
-	ViewData["Title"] = "Register Client";
+	ViewData["Title"] = "Register Admin";
 }
 
 <div class="form-header-style">
-	<h3>Register Client</h3>
+	<h3>Register Admin</h3>
 </div>
-<form method="Post" asp-controller="Auth" asp-action="SignUp" class="form-body">
+
+
+	<form method="Post" asp-controller="Auth" asp-action="SignUpAdmin" class="form-body">
 	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 	{
 		<partial name="_Regestration" />
-	}
-</form>
+		}
+	</form>
+

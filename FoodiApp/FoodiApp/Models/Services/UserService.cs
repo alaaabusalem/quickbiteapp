@@ -1,6 +1,8 @@
 ﻿using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FoodiApp.Models.Services
 {
@@ -13,17 +15,18 @@ namespace FoodiApp.Models.Services
 
 
 		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
-        {
-            _userManager = userManager;
-			_signManager = signManager;	
-        }
-
-        public async Task<UserDto> Authenticate(string UserName, string password)
 		{
-			var result = await _signManager.PasswordSignInAsync(UserName, password,true,false);
-			if (result.Succeeded) 
+			_userManager = userManager;
+			_signManager = signManager;
+		}
+
+		public async Task<UserDto> Authenticate(LoginDto loginDto)
+		{
+			var result = await _signManager.PasswordSignInAsync(loginDto.UserName, loginDto.Password, true, false);
+			if (result.Succeeded)
 			{
-				var user = await _userManager.FindByNameAsync(UserName);
+
+				var user = await _userManager.FindByNameAsync(loginDto.UserName);
 				return new UserDto()
 				{
 
@@ -36,22 +39,60 @@ namespace FoodiApp.Models.Services
 
 		}
 
+		public async Task Logout()
+		{
+			await _signManager.SignOutAsync();
+		}
+
 		public async Task<UserDto> Register(RegisterUserDto registerUser)
 		{
 			var user = new ApplicationUser()
 			{
-				UserName = registerUser.UserName,
+				UserName = registerUser.Name,
 				Email = registerUser.Email,
 				PhoneNumber = registerUser.Phone
 			};
-			var result = await _userManager.CreateAsync(user,registerUser.Password);
+			var result = await _userManager.CreateAsync(user, registerUser.Password);
 
 			if (result.Succeeded)
 			{
+				string Role = "client";
+				await _userManager.AddToRoleAsync(user, Role);
 				return new UserDto
 				{
 					UserName = user.UserName
 				};
+			}
+			return null;
+
+		}
+		public async Task<UserDto> RegisterAdmin(RegisterUserDto registerUser, ModelStateDictionary modelState)
+		{
+			var user = new ApplicationUser()
+			{
+				UserName = registerUser.Name,
+				Email = registerUser.Email,
+				PhoneNumber = registerUser.Phone
+			};
+			var result = await _userManager.CreateAsync(user, registerUser.Password);
+
+			if (result.Succeeded)
+			{
+				string Role = "admin";
+				await _userManager.AddToRoleAsync(user, Role);
+				return new UserDto
+				{
+					UserName = user.UserName
+				};
+			}
+			foreach (var error in result.Errors)
+			{
+				var errorKey = error.Code.Contains("Password") ? nameof(registerUser.Password) :
+					error.Code.Contains("Name") ? nameof(registerUser.Name) :
+					 error.Code.Contains("Email") ? nameof(registerUser.Email) :
+					 "";
+
+				modelState.AddModelError(errorKey, error.Description);
 			}
 			return null;
 
