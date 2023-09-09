@@ -49,15 +49,18 @@
 								<button type="button" class="btn btn-sm btn-outline-secondary">
 									<a class="nav-link" asp-controller="FoodItem" asp-action="Details" asp-route-id="@category.FoodCategoryId">View</a>
 								</button>
+								@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+								{
 								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodCategory" asp-action="Update" asp-route-id="@category.FoodCategoryId">Edit</a></button>
 								<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodCategory" asp-action="Delete" asp-route-id="@category.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Food Category ?')">Delete</a></button>
+								}
 							</div>
 						</div>
 					</div>
 				</div>
 			}
 		</div>
-	
+
 		<div class="text-center mt-3">
 			<a class="btn btn-primary" asp-controller="FoodCategory" asp-action="Create">Add New Food Category</a>
 		</div>

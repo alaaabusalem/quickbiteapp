@@ -66,3 +66,16 @@ body {
 .lable-checkbox-style {
     margin-left: 10px;
 }
+
+.Layout-btn-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 200px
+}
+
+.btn-width {
+    width: 70px;
+    margin-right: 5px;
+    font
+}

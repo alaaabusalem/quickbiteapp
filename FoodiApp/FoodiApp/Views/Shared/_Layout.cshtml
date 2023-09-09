@@ -17,6 +17,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarColor01">
+
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item">
 
@@ -28,23 +29,49 @@
 
 						<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
 							<ul class="navbar-nav">
-								<li class="nav-item dropdown">
-									<div class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										Admin
-									</div>
-									<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-										<li><a class="dropdown-item" asp-area="" asp-controller="FoodCategory" asp-action="Index">Food Categories</a></li>
-										<li><a class="dropdown-item" asp-area="" asp-controller="FoodItem" asp-action="Creat">Add Food Item</a></li>
-										<li><a class="dropdown-item">Registration</a></li>
-									</ul>
-								</li>
+								@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+								{
+									<li class="nav-item dropdown">
+
+										<div class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+											Admin
+										</div>
+
+										<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+											<li><a class="dropdown-item" asp-area="" asp-controller="FoodCategory" asp-action="Index">Food Categories</a></li>
+											<li><a class="dropdown-item" asp-area="" asp-controller="FoodItem" asp-action="Creat">Add Food Item</a></li>
+											<li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="SignUpAdmin">Registration</a></li>
+										</ul>
+
+									</li>
+								}
 							</ul>
+
 						</div>
+
 						<li class="nav-item">
 							<a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 						</li>
 
 					</ul>
+
+					<div>
+						@if (!User.Identity.IsAuthenticated)
+						{
+							<a class="btn btn-warning btn-width" asp-area="" asp-controller="Auth" asp-action="SignUp">Register<span class="visually-hidden">(current)</span> </a>
+
+
+
+
+							<a class="btn btn-secondary btn-width" asp-area="" asp-controller="Auth" asp-action="Login">Login<span class="visually-hidden">(current)</span> </a>
+
+						}
+						else
+						{
+							<a class="btn btn-secondary btn-width" asp-area="" asp-controller="Auth" asp-action="Logout">Logout<span class="visually-hidden">(current)</span> </a>
+
+						}
+					</div>
 
 				</div>
 			</div>

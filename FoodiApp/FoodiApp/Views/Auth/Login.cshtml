@@ -1,8 +1,35 @@
-﻿
-<form asp-controller="Auth" asp-action="Login" method="post">
-    <input type="text" name="UserName" />
-    <input type="text" name="Password" />
+﻿@model LoginDto
 
+@{
+	ViewData["Title"] = "Login";
+}
 
-    <button type="submit"> Submit</button>
+<div class="form-header-style">
+</div>
+<form method="Post" asp-controller="Auth" asp-action="Login" class="form-body">
+	<div class="form-flex">
+		<div class="form-group form-group-style">
+			<lable class=" controle-lable lable-style"> Name</lable>
+			<input type="text" asp-for="@Model.UserName" class="form-control">
+			<span asp-validation-for="@Model.UserName" class="text-danger"></span>
+		</div>
+		<div class="form-group form-group-style">
+			<lable class="controle-lable lable-style"> Password</lable>
+			<input type="password" asp-for="@Model.Password" class="form-control"></input>
+			<span asp-validation-for="@Model.Password" class="text-danger"></span>
+		</div>
+
+		<div class="form-group lable-div-style">
+			@Html.CheckBoxFor(m=>m.RememberMe)
+			<lable class="controle-lable lable-style lable-checkbox-style">Remember Me</lable>
+			<span asp-validation-for="@Model.RememberMe" class="text-danger"></span>
+		</div>
+		<div class="form-group form-group-margin form-header-3">
+			<input type="submit" value="Login" class="btn btn-outline-success float-right" />
+		</div>
+		@section Scripts{
+			@{
+				await Html.RenderPartialAsync("_ValidationScriptsPartial");
+			}
+		}
 </form>
