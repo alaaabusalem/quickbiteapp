@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace FoodiApp.Models.Services
@@ -61,5 +62,29 @@ namespace FoodiApp.Models.Services
 
 
 		}
+
+		//public async Task<ClaimsPrincipal> GetUserFromToken(string token)
+		//{
+		//	var tokenHandler = new JwtSecurityTokenHandler();
+		//	var tokenValidationParameters = new TokenValidationParameters
+		//	{
+		//		ValidateIssuerSigningKey = true,
+		//		IssuerSigningKey = GetSecurityKey(configuration), // Replace with your signing key
+		//		ValidateIssuer = false, // Set to true if issuer validation is required
+		//		ValidateAudience = false // Set to true if audience validation is required
+		//	};
+
+		//	try
+		//	{
+		//		ClaimsPrincipal principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
+		//		return principal;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		// Token validation failed
+		//		return null;
+		//	}
+		//}
+
 	}
 }
