@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> _userManager;
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -68,7 +70,16 @@
 						}
 						else
 						{
-							<a class="btn btn-secondary btn-width" asp-area="" asp-controller="Auth" asp-action="Logout">Logout<span class="visually-hidden">(current)</span> </a>
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+									@_userManager.GetUserName(User)
+								</button>
+								<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+									<li>
+										<a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="Logout">Logout<span class="visually-hidden">(current)</span> </a>
+									</li>
+								</ul>
+							</div>
 
 						}
 					</div>

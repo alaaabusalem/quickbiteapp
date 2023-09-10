@@ -8,8 +8,12 @@
 	<h3>Register Client</h3>
 </div>
 <form method="Post" asp-controller="Auth" asp-action="SignUp" class="form-body">
-	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-	{
-		<partial name="_Regestration" />
-	}
+
+	<partial name="_Regestration" />
+
 </form>
+@section Scripts{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}

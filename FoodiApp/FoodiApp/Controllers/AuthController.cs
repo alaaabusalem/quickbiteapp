@@ -41,23 +41,34 @@ namespace FoodiApp.Controllers
 			var user = await _context.Authenticate(loginDto);
 			if (user != null && loginDto.RememberMe)
 			{
+				string jwtToken = user.Token;
+
 				CookieOptions cookieOptions = new CookieOptions();
 
 				cookieOptions.Expires = DateTime.Now.AddDays(7);
 
-				HttpContext.Response.Cookies.Append("name", loginDto.UserName, cookieOptions);
+				HttpContext.Response.Cookies.Append("Token", jwtToken, cookieOptions);
 			}
 			return RedirectToAction("Index", "Home");
 
 		}
 		public IActionResult Login()
 		{
-			//string name = HttpContext.Request.Cookies["name"];
-			//if (name != null)
-			//{
-			//	return RedirectToAction("Index", "Home");
+			string name = HttpContext.Request.Cookies["Token"];
+			if (name == null)
+			{
+				return View();
+
+			}
+
+			return RedirectToAction("Index", "Home");
 			//}
-			return View();
+			//else
+			//{
+			//	return RedirectToAction("FoodCategory", "Index");
+
+			//}
+
 		}
 
 		[HttpPost]
@@ -66,7 +77,7 @@ namespace FoodiApp.Controllers
 			await _context.RegisterAdmin(regUser, this.ModelState);
 			if (ModelState.IsValid)
 			{
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Index");
 
 			}
 			return View(regUser);

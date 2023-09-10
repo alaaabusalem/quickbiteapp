@@ -11,13 +11,15 @@ namespace FoodiApp.Models.Services
 		private UserManager<ApplicationUser> _userManager;
 
 		private SignInManager<ApplicationUser> _signManager;
+		private JwtTokenService tokenService;
 
 
-
-		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
+		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager, JwtTokenService tokenservice
+)
 		{
 			_userManager = userManager;
 			_signManager = signManager;
+			tokenService = tokenservice;
 		}
 
 		public async Task<UserDto> Authenticate(LoginDto loginDto)
@@ -30,7 +32,8 @@ namespace FoodiApp.Models.Services
 				return new UserDto()
 				{
 
-					UserName = user.UserName
+					UserName = user.UserName,
+					Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(60))
 				};
 
 			}
