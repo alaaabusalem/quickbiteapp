@@ -9,10 +9,15 @@
 </div>
 
 
-	<form method="Post" asp-controller="Auth" asp-action="SignUpAdmin" class="form-body">
+<form method="Post" asp-controller="Auth" asp-action="SignUpAdmin" class="form-body">
 	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 	{
 		<partial name="_Regestration" />
-		}
-	</form>
+	}
+</form>
+@section Scripts{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}
 

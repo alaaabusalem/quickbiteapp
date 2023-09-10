@@ -1,4 +1,5 @@
-﻿using FoodiApp.Models.DTOs;
+﻿using System.Security.Claims;
+using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -11,13 +12,14 @@ namespace FoodiApp.Models.Services
 		private UserManager<ApplicationUser> _userManager;
 
 		private SignInManager<ApplicationUser> _signManager;
-
+		//private JwtTokenService tokenService;
 
 
 		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
 		{
 			_userManager = userManager;
 			_signManager = signManager;
+			//tokenService = tokenservice;
 		}
 
 		public async Task<UserDto> Authenticate(LoginDto loginDto)
@@ -30,13 +32,32 @@ namespace FoodiApp.Models.Services
 				return new UserDto()
 				{
 
-					UserName = user.UserName
+					UserName = user.UserName,
+					//Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(60))
 				};
 
 			}
 			return null;
 
 
+		}
+
+		public async Task<UserDto> GetUser(string name)
+
+		{
+			//var claim = await tokenService.GetUserFromToken(Token);
+			var user = await _userManager.FindByNameAsync(name);
+			if (user == null)
+			{
+
+				return null;
+			}
+			await _signManager.SignInAsync(user, true);
+			return new UserDto()
+			{
+				UserName = user.UserName,
+
+			};
 		}
 
 		public async Task Logout()
@@ -97,5 +118,6 @@ namespace FoodiApp.Models.Services
 			return null;
 
 		}
+
 	}
 }

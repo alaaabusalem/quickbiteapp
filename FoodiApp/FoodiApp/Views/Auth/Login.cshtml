@@ -27,9 +27,10 @@
 		<div class="form-group form-group-margin form-header-3">
 			<input type="submit" value="Login" class="btn btn-outline-success float-right" />
 		</div>
-		@section Scripts{
-			@{
-				await Html.RenderPartialAsync("_ValidationScriptsPartial");
-			}
-		}
+
 </form>
+@section Scripts{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+		}

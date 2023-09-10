@@ -2,8 +2,11 @@ using FoodiApp.Data;
 using FoodiApp.Models;
 using FoodiApp.Models.Interfaces;
 using FoodiApp.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,14 @@ builder.Services
 .AddDbContext<FoodieDBContext>
 	(opions => opions.UseSqlServer(connString));
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+	options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<FoodieDBContext>();
+
+//builder.Services.AddScoped<JwtTokenService>();
+
+
 builder.Services.AddTransient<IFoodCategory, FoodCategoryService>();
 
 builder.Services.AddTransient<IUser, UserService>();
@@ -24,16 +35,24 @@ builder.Services.AddTransient<IUser, UserService>();
 builder.Services.AddTransient<IFoodItems, FoodItemService>();
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>
-	(
-	options => options.User.RequireUniqueEmail = true
-	).AddEntityFrameworkStores<FoodieDBContext>();
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(
+//options =>
+//{
+//	options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//	// Tell the authenticaion scheme "how/where" to validate the token + secret
+//	options.TokenValidationParameters = JwtTokenService.GetValidationPerameters(builder.Configuration);
+//}
+);
+
 builder.Services.AddAuthorization();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-	options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(0.3);
 	options.LoginPath = "/Auth/Login";
 });
 

@@ -1,6 +1,9 @@
-﻿using FoodiApp.Models.DTOs;
+﻿using System.Security.Claims;
+using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
@@ -41,23 +44,37 @@ namespace FoodiApp.Controllers
 			var user = await _context.Authenticate(loginDto);
 			if (user != null && loginDto.RememberMe)
 			{
+				string name = user.UserName;
 				CookieOptions cookieOptions = new CookieOptions();
+				cookieOptions.Expires = DateTimeOffset.UtcNow.AddDays(7);
 
-				cookieOptions.Expires = DateTime.Now.AddDays(7);
 
-				HttpContext.Response.Cookies.Append("name", loginDto.UserName, cookieOptions);
+				HttpContext.Response.Cookies.Append("name", name, cookieOptions);
 			}
 			return RedirectToAction("Index", "Home");
 
 		}
-		public IActionResult Login()
+		[HttpGet]
+		public async Task<IActionResult> Login()
 		{
-			//string name = HttpContext.Request.Cookies["name"];
-			//if (name != null)
-			//{
-			//	return RedirectToAction("Index", "Home");
-			//}
+			string name = HttpContext.Request.Cookies["name"];
+			if (name != null)
+			{
+				var user = await _context.GetUser(name);
+				if (user != null)
+				{
+					return RedirectToAction("Index", "Home");
+				}
+			}
+
 			return View();
+			//}
+			//else
+			//{
+			//	return RedirectToAction("FoodCategory", "Index");
+
+			//}
+
 		}
 
 		[HttpPost]
@@ -66,7 +83,7 @@ namespace FoodiApp.Controllers
 			await _context.RegisterAdmin(regUser, this.ModelState);
 			if (ModelState.IsValid)
 			{
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "Index");
 
 			}
 			return View(regUser);
@@ -80,6 +97,7 @@ namespace FoodiApp.Controllers
 		public async Task<IActionResult> Logout()
 		{
 			await _context.Logout();
+			HttpContext.Response.Cookies.Delete("name");
 			return RedirectToAction("Index", "Home");
 		}
 	}
