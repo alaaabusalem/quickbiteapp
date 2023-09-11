@@ -52,7 +52,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-	options.ExpireTimeSpan = TimeSpan.FromMinutes(0.3);
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 	options.LoginPath = "/Auth/Login";
 });
 
