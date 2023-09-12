@@ -14,13 +14,13 @@ namespace FoodiApp.Controllers
 	{
 		private readonly IFoodItems _context;
 		private readonly IFoodCategory _FoodCategory;
-		private readonly IConfiguration _configuration;
+		private readonly IUpload _upload;
 
-		public FoodItemController(IFoodItems context, IFoodCategory foodCategory, IConfiguration configuration)
+		public FoodItemController(IFoodItems context, IFoodCategory foodCategory,IUpload upload)
 		{
 			_context = context;
 			_FoodCategory = foodCategory;
-			_configuration = configuration;
+			_upload = upload;
 		}
 		public IActionResult Index()
 		{
@@ -53,23 +53,10 @@ namespace FoodiApp.Controllers
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 
-		public async Task<IActionResult> Creat(CreatFoodItemDTO creatFoodItemDTO)
+		public async Task<IActionResult> Creat(CreatFoodItemDTO creatFoodItemDTO, IFormFile file)
 		{
-			BlobContainerClient blobContainerClient = new BlobContainerClient(_configuration.GetConnectionString("StorageAccount"), "images");
-			await blobContainerClient.CreateIfNotExistsAsync();
-			BlobClient blobClient = blobContainerClient.GetBlobClient(creatFoodItemDTO.ImageFile.FileName);
-
-			using var fileStream = creatFoodItemDTO.ImageFile.OpenReadStream();
-			BlobUploadOptions blobUploadOptions = new BlobUploadOptions()
-			{
-				HttpHeaders = new BlobHttpHeaders { ContentType = creatFoodItemDTO.ImageFile.ContentType }
-			};
-
-			if (!await blobClient.ExistsAsync())
-			{
-				await blobClient.UploadAsync(fileStream, blobUploadOptions);
-			}
-			creatFoodItemDTO.ImageUrl = blobClient.Uri.ToString();
+			var doc = await _upload.UploadFile(file);
+			creatFoodItemDTO.ImageUrl = doc.URL;
 			var foodItem = await _context.Create(creatFoodItemDTO);
 			return RedirectToAction("Details", new { id = creatFoodItemDTO.FoodCategoryId });
 
@@ -98,8 +85,10 @@ namespace FoodiApp.Controllers
 		[HttpPost]
 		[Authorize(Roles = "Admin")]
 
-		public async Task<IActionResult> Update(CreatFoodItemDTO creatFoodItemDTO)
+		public async Task<IActionResult> Update(CreatFoodItemDTO creatFoodItemDTO, IFormFile file)
 		{
+			var doc = await _upload.UploadFile(file);
+			creatFoodItemDTO.ImageUrl = doc.URL;
 			var foodItem = await _context.Update(creatFoodItemDTO);
 			return RedirectToAction("ItemDetails", new { id = creatFoodItemDTO.FoodItemId });
 
