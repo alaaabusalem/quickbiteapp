@@ -1,8 +1,11 @@
-﻿using FoodiApp.Models;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using FoodiApp.Models;
 using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace FoodiApp.Controllers
 {
@@ -11,11 +14,13 @@ namespace FoodiApp.Controllers
 	{
 		private readonly IFoodItems _context;
 		private readonly IFoodCategory _FoodCategory;
+		private readonly IConfiguration _configuration;
 
-		public FoodItemController(IFoodItems context, IFoodCategory foodCategory)
+		public FoodItemController(IFoodItems context, IFoodCategory foodCategory, IConfiguration configuration)
 		{
 			_context = context;
 			_FoodCategory = foodCategory;
+			_configuration = configuration;
 		}
 		public IActionResult Index()
 		{
@@ -46,10 +51,25 @@ namespace FoodiApp.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles ="Admin")]
+		[Authorize(Roles = "Admin")]
 
 		public async Task<IActionResult> Creat(CreatFoodItemDTO creatFoodItemDTO)
 		{
+			BlobContainerClient blobContainerClient = new BlobContainerClient(_configuration.GetConnectionString("StorageAccount"), "images");
+			await blobContainerClient.CreateIfNotExistsAsync();
+			BlobClient blobClient = blobContainerClient.GetBlobClient(creatFoodItemDTO.ImageFile.FileName);
+
+			using var fileStream = creatFoodItemDTO.ImageFile.OpenReadStream();
+			BlobUploadOptions blobUploadOptions = new BlobUploadOptions()
+			{
+				HttpHeaders = new BlobHttpHeaders { ContentType = creatFoodItemDTO.ImageFile.ContentType }
+			};
+
+			if (!await blobClient.ExistsAsync())
+			{
+				await blobClient.UploadAsync(fileStream, blobUploadOptions);
+			}
+			creatFoodItemDTO.ImageUrl = blobClient.Uri.ToString();
 			var foodItem = await _context.Create(creatFoodItemDTO);
 			return RedirectToAction("Details", new { id = creatFoodItemDTO.FoodCategoryId });
 

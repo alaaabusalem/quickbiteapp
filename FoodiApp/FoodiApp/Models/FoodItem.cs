@@ -13,6 +13,8 @@
 		public bool IsAvaliabe { get; set; }
 
 		//NP
+		public string? ImageUrl { get; set; }
+
 		public FoodCategory? foodCategory { get; set; }
 	}
 }

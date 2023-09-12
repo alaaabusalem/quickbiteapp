@@ -62,6 +62,8 @@
 				<strong class="d-inline-block mb-2 text-primary-emphasis food-category-name">Food category Name: @Model.foodCategory.Name</strong>
 				<h3 class="mb-0 food-item-name">Name: @Model.Name</h3>
 				<div class="mb-1 food-item-price">Price = @Model.Price $</div>
+				<img src="@Model.ImageUrl" alt="...">
+
 				@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 				{
 					<div class="availability-box @((Model.IsAvaliabe) ? "availability-true" : "availability-false")"></div>

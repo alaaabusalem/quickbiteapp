@@ -26,7 +26,8 @@ namespace FoodiApp.Models.Services
 					Name = creatFoodItemDTO.Name,
 					Description = creatFoodItemDTO.Description,
 					Price = creatFoodItemDTO.Price,
-					IsAvaliabe = creatFoodItemDTO.IsAvaliabe
+					IsAvaliabe = creatFoodItemDTO.IsAvaliabe,
+					ImageUrl = creatFoodItemDTO.ImageUrl
 				};
 				await _context.AddAsync(foodItem);
 				await _context.SaveChangesAsync();

@@ -91,16 +91,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3a365727-6158-4e29-8ce2-0493281fa0e1",
+                            ConcurrencyStamp = "683207b3-5591-4f83-be06-e4ac129ffe66",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB0akDfAOm3c3/MuYp9M/Oa69fJV7s8dTZs2sjy2HDbjLmsHvSKhLqMZPA7UGzLYCA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN4A2FjkTgeGmT4StZl9SPO7d82LF/zDcabLA/FsqQ6bUqLGHj3l92XR0EIVOZkDMQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb5c5ec7-7eec-4c93-8f9b-0a3f1e26f25b",
+                            SecurityStamp = "7f61dd27-11ed-48ec-996d-63be8a7f5c37",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -179,6 +179,9 @@ namespace FoodiApp.Migrations
 
                     b.Property<int>("FoodCategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvaliabe")
                         .HasColumnType("bit");
