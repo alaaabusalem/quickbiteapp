@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodiApp.Migrations
 {
 	/// <inheritdoc />
-	public partial class initialDbclass29 : Migration
+	public partial class initialDb : Migration
 	{
 		/// <inheritdoc />
 		protected override void Up(MigrationBuilder migrationBuilder)
@@ -207,7 +207,7 @@ namespace FoodiApp.Migrations
 			migrationBuilder.InsertData(
 				table: "AspNetUsers",
 				columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-				values: new object[] { "1", 0, "683207b3-5591-4f83-be06-e4ac129ffe66", "admin@example.com", true, false, null, "admin@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEN4A2FjkTgeGmT4StZl9SPO7d82LF/zDcabLA/FsqQ6bUqLGHj3l92XR0EIVOZkDMQ==", "1234567890", false, "7f61dd27-11ed-48ec-996d-63be8a7f5c37", false, "admin" });
+				values: new object[] { "1", 0, "57113ea0-2d38-4dbe-891c-f523b651744d", "admin@example.com", true, false, null, "admin@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAECZjcsJUX/lqdNAX+frMGdezLqXyCc/ZYaq8T2VTesL4H+u46hgtqLBO2NNMWERucA==", "1234567890", false, "cb475450-ad3f-45cc-bd49-a740e61e21ca", false, "admin" });
 
 			migrationBuilder.InsertData(
 				table: "FoodCategories",
@@ -234,15 +234,15 @@ namespace FoodiApp.Migrations
 				columns: new[] { "FoodItemId", "Description", "FoodCategoryId", "ImageUrl", "IsAvaliabe", "Name", "Price" },
 				values: new object[,]
 				{
-					{ 1, "Fluffy scrambled eggs served with toast", 1, null, true, "Scrambled Eggs", 5.9900000000000002 },
-					{ 2, "Stack of fluffy pancakes with syrup", 1, null, true, "Pancakes", 7.4900000000000002 },
-					{ 3, "Scrambled eggs, bacon, and cheese wrapped in a tortilla", 1, null, true, "Classic Breakfast Burrito", 8.9900000000000002 },
-					{ 4, "Chilled coffee served with ice", 2, null, true, "Iced Coffee", 3.9900000000000002 },
-					{ 5, "Blended fresh fruit with yogurt or juice", 2, null, true, "Fruit Smoothie", 4.4900000000000002 },
-					{ 6, "Rich and creamy hot chocolate", 2, null, true, "Hot Chocolate", 3.4900000000000002 },
-					{ 7, "Juicy grilled shrimp with garlic butter", 3, null, true, "Grilled Shrimp", 12.99 },
-					{ 8, "Creamy lobster soup with a hint of sherry", 3, null, true, "Lobster Bisque", 9.9900000000000002 },
-					{ 9, "Assortment of seafood including shrimp, crab, and mussels", 3, null, true, "Seafood Platter", 22.989999999999998 },
+					{ 1, "Fluffy scrambled eggs served with toast", 1, "https://foodiappstaticfile.blob.core.windows.net/images/ScrambledEggs.jpg", true, "Scrambled Eggs", 5.9900000000000002 },
+					{ 2, "Stack of fluffy pancakes with syrup", 1, "https://foodiappstaticfile.blob.core.windows.net/images/Pancake.jpg", true, "Pancakes", 7.4900000000000002 },
+					{ 3, "Scrambled eggs, bacon, and cheese wrapped in a tortilla", 1, "https://foodiappstaticfile.blob.core.windows.net/images/ClassicBreakfastBurrito.jpg", true, "Classic Breakfast Burrito", 8.9900000000000002 },
+					{ 4, "Chilled coffee served with ice", 2, "https://foodiappstaticfile.blob.core.windows.net/images/IcedCoffee.jpg", true, "Iced Coffee", 3.9900000000000002 },
+					{ 5, "Blended fresh fruit with yogurt or juice", 2, "https://foodiappstaticfile.blob.core.windows.net/images/FruitSmoothie.jpg", true, "Fruit Smoothie", 4.4900000000000002 },
+					{ 6, "Rich and creamy hot chocolate", 2, "https://foodiappstaticfile.blob.core.windows.net/images/HotChocolate.jpg", true, "Hot Chocolate", 3.4900000000000002 },
+					{ 7, "Juicy grilled shrimp with garlic butter", 3, "https://foodiappstaticfile.blob.core.windows.net/images/GrilledShrimp.jpg", true, "Grilled Shrimp", 12.99 },
+					{ 8, "Creamy lobster soup with a hint of sherry", 3, "https://foodiappstaticfile.blob.core.windows.net/images/LobsterBisque.jpg", true, "Lobster Bisque", 9.9900000000000002 },
+					{ 9, "Assortment of seafood including shrimp, crab, and mussels", 3, "https://foodiappstaticfile.blob.core.windows.net/images/SeafoodPlatter.jpg", true, "Seafood Platter", 22.989999999999998 },
 					{ 10, "Classic pizza with tomato, mozzarella, and basil", 4, null, true, "Margherita Pizza", 11.99 },
 					{ 11, "Pizza topped with pepperoni and melted cheese", 4, null, true, "Pepperoni Pizza", 13.99 },
 					{ 12, "Pizza with ham, pineapple, and tomato sauce", 4, null, true, "Hawaiian Pizza", 12.49 },

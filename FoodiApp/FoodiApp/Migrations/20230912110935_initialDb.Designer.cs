@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodiApp.Migrations
 {
     [DbContext(typeof(FoodieDBContext))]
-    [Migration("20230912071335_initialDb-class29")]
-    partial class initialDbclass29
+    [Migration("20230912110935_initialDb")]
+    partial class initialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,16 +94,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "683207b3-5591-4f83-be06-e4ac129ffe66",
+                            ConcurrencyStamp = "57113ea0-2d38-4dbe-891c-f523b651744d",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN4A2FjkTgeGmT4StZl9SPO7d82LF/zDcabLA/FsqQ6bUqLGHj3l92XR0EIVOZkDMQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECZjcsJUX/lqdNAX+frMGdezLqXyCc/ZYaq8T2VTesL4H+u46hgtqLBO2NNMWERucA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f61dd27-11ed-48ec-996d-63be8a7f5c37",
+                            SecurityStamp = "cb475450-ad3f-45cc-bd49-a740e61e21ca",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -208,6 +208,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 1,
                             Description = "Fluffy scrambled eggs served with toast",
                             FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ScrambledEggs.jpg",
                             IsAvaliabe = true,
                             Name = "Scrambled Eggs",
                             Price = 5.9900000000000002
@@ -217,6 +218,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 2,
                             Description = "Stack of fluffy pancakes with syrup",
                             FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/Pancake.jpg",
                             IsAvaliabe = true,
                             Name = "Pancakes",
                             Price = 7.4900000000000002
@@ -226,6 +228,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 3,
                             Description = "Scrambled eggs, bacon, and cheese wrapped in a tortilla",
                             FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ClassicBreakfastBurrito.jpg",
                             IsAvaliabe = true,
                             Name = "Classic Breakfast Burrito",
                             Price = 8.9900000000000002
@@ -235,6 +238,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 4,
                             Description = "Chilled coffee served with ice",
                             FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/IcedCoffee.jpg",
                             IsAvaliabe = true,
                             Name = "Iced Coffee",
                             Price = 3.9900000000000002
@@ -244,6 +248,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 5,
                             Description = "Blended fresh fruit with yogurt or juice",
                             FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/FruitSmoothie.jpg",
                             IsAvaliabe = true,
                             Name = "Fruit Smoothie",
                             Price = 4.4900000000000002
@@ -253,6 +258,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 6,
                             Description = "Rich and creamy hot chocolate",
                             FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/HotChocolate.jpg",
                             IsAvaliabe = true,
                             Name = "Hot Chocolate",
                             Price = 3.4900000000000002
@@ -262,6 +268,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 7,
                             Description = "Juicy grilled shrimp with garlic butter",
                             FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/GrilledShrimp.jpg",
                             IsAvaliabe = true,
                             Name = "Grilled Shrimp",
                             Price = 12.99
@@ -271,6 +278,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 8,
                             Description = "Creamy lobster soup with a hint of sherry",
                             FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/LobsterBisque.jpg",
                             IsAvaliabe = true,
                             Name = "Lobster Bisque",
                             Price = 9.9900000000000002
@@ -280,6 +288,7 @@ namespace FoodiApp.Migrations
                             FoodItemId = 9,
                             Description = "Assortment of seafood including shrimp, crab, and mussels",
                             FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/SeafoodPlatter.jpg",
                             IsAvaliabe = true,
                             Name = "Seafood Platter",
                             Price = 22.989999999999998
