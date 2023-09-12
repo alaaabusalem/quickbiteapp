@@ -1,4 +1,6 @@
-﻿namespace FoodiApp.Models.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FoodiApp.Models.DTOs
 {
 	public class FoodCategoryDTO
 	{
@@ -8,6 +10,8 @@
 
 	public class CreatFoodCategoryDTO
 	{
+		[Required]
+
 		public string Name { get; set; }
 	}
 }

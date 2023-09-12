@@ -36,7 +36,8 @@ namespace FoodiApp.Data
 					Name = "Scrambled Eggs",
 					Description = "Fluffy scrambled eggs served with toast",
 					Price = 5.99,
-					IsAvaliabe = true
+					IsAvaliabe = true,
+					ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ScrambledEggs.jpg"
 				},
 new FoodItem
 {
@@ -45,7 +46,8 @@ new FoodItem
 	Name = "Pancakes",
 	Description = "Stack of fluffy pancakes with syrup",
 	Price = 7.49,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/Pancake.jpg"
 },
 new FoodItem
 {
@@ -54,7 +56,8 @@ new FoodItem
 	Name = "Classic Breakfast Burrito",
 	Description = "Scrambled eggs, bacon, and cheese wrapped in a tortilla",
 	Price = 8.99,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ClassicBreakfastBurrito.jpg"
 },
 new FoodItem
 {
@@ -63,7 +66,8 @@ new FoodItem
 	Name = "Iced Coffee",
 	Description = "Chilled coffee served with ice",
 	Price = 3.99,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/IcedCoffee.jpg"
 },
 new FoodItem
 {
@@ -72,7 +76,8 @@ new FoodItem
 	Name = "Fruit Smoothie",
 	Description = "Blended fresh fruit with yogurt or juice",
 	Price = 4.49,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/FruitSmoothie.jpg"
 },
 new FoodItem
 {
@@ -81,7 +86,8 @@ new FoodItem
 	Name = "Hot Chocolate",
 	Description = "Rich and creamy hot chocolate",
 	Price = 3.49,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/HotChocolate.jpg"
 }, new FoodItem
 {
 	FoodItemId = 7,
@@ -89,7 +95,8 @@ new FoodItem
 	Name = "Grilled Shrimp",
 	Description = "Juicy grilled shrimp with garlic butter",
 	Price = 12.99,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/GrilledShrimp.jpg"
 },
 new FoodItem
 {
@@ -98,7 +105,8 @@ new FoodItem
 	Name = "Lobster Bisque",
 	Description = "Creamy lobster soup with a hint of sherry",
 	Price = 9.99,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/LobsterBisque.jpg"
 },
 new FoodItem
 {
@@ -107,7 +115,8 @@ new FoodItem
 	Name = "Seafood Platter",
 	Description = "Assortment of seafood including shrimp, crab, and mussels",
 	Price = 22.99,
-	IsAvaliabe = true
+	IsAvaliabe = true,
+	ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/SeafoodPlatter.jpg"
 }, new FoodItem
 {
 	FoodItemId = 10,

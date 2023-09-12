@@ -40,7 +40,15 @@
 			{
 				<div class="col">
 					<div class="card shadow-sm category-card">
-						<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
+						@if (foodItem.ImageUrl != null)
+						{
+							<img src="@foodItem.ImageUrl" alt="image" class="card-img-top">
+
+						}
+						else
+						{
+							<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
+						}
 						<div class="card-body">
 							<p class="card-text category-name">@foodItem.Name</p>
 							<p class="card-text category-name">Price = @foodItem.Price $</p>

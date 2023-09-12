@@ -62,7 +62,6 @@
 				<strong class="d-inline-block mb-2 text-primary-emphasis food-category-name">Food category Name: @Model.foodCategory.Name</strong>
 				<h3 class="mb-0 food-item-name">Name: @Model.Name</h3>
 				<div class="mb-1 food-item-price">Price = @Model.Price $</div>
-				<img src="@Model.ImageUrl" alt="...">
 
 				@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 				{
@@ -72,9 +71,19 @@
 				<p class="card-text mb-auto food-item-description">Description: @Model.Description</p>
 
 			</div>
-			<div class="col-auto py-4 mx-4 d-none d-lg-block">
-				<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Thumbnail" class="food-item-image">
-			</div>
+			@if (Model.ImageUrl != null)
+			{
+				<div class="col-auto py-4 mx-4 d-none d-lg-block">
+
+					<img src="@Model.ImageUrl" alt="image" class=" food-item-image img-thumbnail rounded float-start">
+				</div>
+			}
+			else
+			{
+				<div class="col-auto py-4 mx-4 d-none d-lg-block">
+					<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Thumbnail" class="food-item-image">
+				</div>
+			}
 		</div>
 	</div>
 </div>
