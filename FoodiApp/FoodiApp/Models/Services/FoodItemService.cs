@@ -75,6 +75,7 @@ namespace FoodiApp.Models.Services
 				foodItem.Price = creatFoodItemDTO.Price;
 				foodItem.FoodCategoryId = creatFoodItemDTO.FoodCategoryId;
 				foodItem.IsAvaliabe = creatFoodItemDTO.IsAvaliabe;
+				foodItem.ImageUrl = creatFoodItemDTO.ImageUrl;
 				_context.Entry(foodItem).State = EntityState.Modified;
 				await _context.SaveChangesAsync();
 				return creatFoodItemDTO;

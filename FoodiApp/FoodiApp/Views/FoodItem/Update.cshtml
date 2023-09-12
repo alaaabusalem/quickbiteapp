@@ -8,7 +8,7 @@
 <div class="form-header-style">
 	<h3>Update Food Item</h3>
 </div>
-<form method="Post" asp-controller="FoodItem" asp-action="Update" class="form-body">
+<form method="Post" asp-controller="FoodItem" asp-action="Update" class="form-body" enctype="multipart/form-data">
 
 	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 	{
@@ -40,6 +40,12 @@
 			@Html.CheckBoxFor(m=>m.IsAvaliabe,Model.IsAvaliabe)
 			<lable class="controle-lable lable-style lable-checkbox-style">IsAvaliabe</lable>
 			<span asp-validation-for="@Model.IsAvaliabe" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label for="formFile" class="form-label">Image</label>
+			<input class="form-control" type="file" id="formFile" name="file">
+			
+
 		</div>
 		<div class="form-group form-group-margin form-header-3">
 			<input type="submit" value="update" class="btn btn-outline-success float-right" />
