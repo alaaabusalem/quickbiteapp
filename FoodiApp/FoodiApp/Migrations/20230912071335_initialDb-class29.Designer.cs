@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodiApp.Migrations
 {
     [DbContext(typeof(FoodieDBContext))]
-    [Migration("20230909155739_SeedAdmin")]
-    partial class SeedAdmin
+    [Migration("20230912071335_initialDb-class29")]
+    partial class initialDbclass29
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,16 +94,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "96892940-458b-482c-bf10-8826e958f6aa",
+                            ConcurrencyStamp = "683207b3-5591-4f83-be06-e4ac129ffe66",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDHkzkPAuyHN6zYb+lbPwy3Rjei0WZX6Mn75kWs5JKGBRTW88fPBS5810xrNoKdNOA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN4A2FjkTgeGmT4StZl9SPO7d82LF/zDcabLA/FsqQ6bUqLGHj3l92XR0EIVOZkDMQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eebb61eb-cf72-4214-9e64-a3ae3d3442ee",
+                            SecurityStamp = "7f61dd27-11ed-48ec-996d-63be8a7f5c37",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -182,6 +182,9 @@ namespace FoodiApp.Migrations
 
                     b.Property<int>("FoodCategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvaliabe")
                         .HasColumnType("bit");
@@ -481,6 +484,13 @@ namespace FoodiApp.Migrations
                     b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
+                        new
+                        {
+                            Id = "client",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
+                            Name = "Client",
+                            NormalizedName = "CLIENT"
+                        },
                         new
                         {
                             Id = "admin",
