@@ -77,5 +77,13 @@ body {
 .btn-width {
     width: 70px;
     margin-right: 5px;
-    font
+}
+
+.table-width {
+    width: 600px
+}
+
+.add-icon {
+    color: white;
+    font-weight: bolder
 }
