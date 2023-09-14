@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
 {
-	[Authorize]
+
 	public class HomeController : Controller
 	{
 
