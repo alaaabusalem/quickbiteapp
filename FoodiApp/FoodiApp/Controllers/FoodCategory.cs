@@ -14,12 +14,16 @@ namespace FoodiApp.Controllers
 		{
 			_foodCategory = foodCategory;
 		}
+
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> Index()
 		{
 			var foodCategories = await _foodCategory.GetFoodCategories();
 			return View(foodCategories);
 
 		}
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult Delete(int id)
 		{

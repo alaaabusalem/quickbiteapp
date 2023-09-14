@@ -16,30 +16,41 @@ namespace FoodiApp.Controllers
 		private readonly IFoodCategory _FoodCategory;
 		private readonly IUpload _upload;
 
-		public FoodItemController(IFoodItems context, IFoodCategory foodCategory,IUpload upload)
+		public FoodItemController(IFoodItems context, IFoodCategory foodCategory, IUpload upload)
 		{
 			_context = context;
 			_FoodCategory = foodCategory;
 			_upload = upload;
 		}
+
+		[Authorize(Roles = "Admin")]
+
 		public IActionResult Index()
 		{
 			var foodItems = _context.GetAllFoodItems();
 			return View(foodItems);
 
 		}
+
+		[Authorize(Roles = "Admin")]
+
 		public IActionResult Details(int id)
 		{
 			var foodItem = _context.GetFoodItem(id);
 			return View(foodItem);
 
 		}
+
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> ItemDetails(int id)
 		{
 
 			var foodItem = await _context.GetFoodItemDetails(id);
 			return View(foodItem);
 		}
+
+
 		[Authorize(Roles = "Admin")]
 
 		public async Task<IActionResult> Creat()
