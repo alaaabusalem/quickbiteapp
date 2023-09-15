@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Rubik:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mooli&family=Rubik:wght@300&display=swap');
 html {
     font-size: 14px;
 }
@@ -21,7 +22,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    background-color: #0b1315;
 }
 
 .form-body {
@@ -111,9 +112,41 @@ body {
     color: white;
     font-family: 'Great Vibes', cursive;
     font-family: 'Rubik', sans-serif;
+    letter-spacing:2px;
+    font-weight:bold;
 }
 cite{
     color:white;
 }
+.nav-costum {
+    background-color: #0b1315;
+    border-bottom-color: wheat !important;
+    border-bottom-width: 2px!important;
+}
 
+footer {
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Mooli', sans-serif;
+    font-family: 'Rubik', sans-serif; 
+    
+}
+main {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  
+}
+.footer-container {
+    height: 100%;
+    border-left: solid;
+    border-left-color: wheat;
+    border-left-width: 1px;
+    border-right: solid;
+    border-right-color: wheat;
+    border-right-width: 1px;
+}
 
+.div-footer-opining {
+    border-bottom: double;
+    border-bottom-color: wheat;
+    border-bottom-width:10px;
+}
