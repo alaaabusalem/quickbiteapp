@@ -16,7 +16,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-dark bg-dark navbar-expand-lg" data-bs-theme="dark">
+		<nav class="navbar navbar-dark  navbar-expand-lg nav-costum border-bottom" data-bs-theme="dark">
 			<div class="container-fluid">
 				<a style="font-size:30px ; color :beige " class="nav-link " href="#">Foodi</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,14 +93,28 @@
 		</nav>
 	</header>
 	<div>
-		<main role="main" class="pb-3">
+		<main role="main" >
 			@RenderBody()
 		</main>
 	</div>
 
-	<footer class="border-top footer text-muted">
-		<div class="container">
-			&copy; 2023 - FoodiApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	<footer class=" footer border-top  h-50 m-lg-5 mr-5" style=" margin: 0!important;
+padding-bottom:0!important;
+border-top-color: white !important;
+    background-color: #0b1315 !important;
+    height:400px!important;
+color:white!important;
+    border-top-width: 2px!important;
+">
+		<div class=" footer-container container d-flex flex-column justify-content-center align-items-center pt-5 mr-4 ml-4">
+			<div>
+				<h3> Classy Restaurant, Amman Alshmesanie</h3>
+			</div>
+			<div>
+				<p> 0799999999, info@ClasstRestaurant.com</p>
+			</div>
+			<div class="div-footer-opining">
+				<p> Opening: 9:00 am - 12:am</p>
 		</div>
 	</footer>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
