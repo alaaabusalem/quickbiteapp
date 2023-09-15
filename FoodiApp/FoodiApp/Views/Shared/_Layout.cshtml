@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] - FoodiApp</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/FoodiApp.styles.css" asp-append-version="true" />
 	<link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
@@ -14,7 +16,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+		<nav class="navbar navbar-dark bg-dark navbar-expand-lg" data-bs-theme="dark">
 			<div class="container-fluid">
 				<a style="font-size:30px ; color :beige " class="nav-link " href="#">Foodi</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +92,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class="container">
+	<div>
 		<main role="main" class="pb-3">
 			@RenderBody()
 		</main>
