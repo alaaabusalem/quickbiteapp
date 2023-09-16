@@ -1,71 +1,53 @@
 ﻿@model IEnumerable<FoodItem>
 
 
-<style>
-	.category-card {
-		transition: transform 0.3s ease-in-out;
-	}
 
-		.category-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		}
 
-	.category-name {
-		font-family: 'Bahnschrift', sans-serif;
-		font-size: 1.25rem;
-		text-align: center;
-		transition: color 0.3s ease-in-out;
-	}
-
-		.category-name:hover {
-			color: #BEADFA;
-		}
-
-	.btn-group {
-		margin-top: 15px;
-	}
-
-		.btn-group .btn {
-			margin-right: 10px;
-			padding: 0.2rem 0.5rem;
-			font-size: 0.9rem;
-		}
-</style>
-
-<div class="album py-5 bg-body-tertiary">
-	<div class="container">
-		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-			@foreach (var foodItem in Model)
+<div class="mt-5 pt-5 pb-5 container-lg">
+	<table class="table table-dark table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">IsAvaliabe</th>
+				<th scope="col">Image</th>
+				<th scope="col">Description</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
 			{
-				<div class="col">
-					<div class="card shadow-sm category-card">
-						@if (foodItem.ImageUrl != null)
-						{
-							<img src="@foodItem.ImageUrl" alt="image" class="card-img-top">
+				<tr>
+				<td>@item.Name</td>
+					<td>@item.Price</td>
+					@if (item.IsAvaliabe)
+					{
+						<td>
+							<i class="fa-sharp fa-solid fa-check fa-2xl" style="color: #01230b; font-weight:bolder;"></i>
+						</td>
+					}
+					else
+					{
+						<td><i class="fa-solid fa-xmark fa-2xl" style="color: #410101;"></i>
 
-						}
-						else
-						{
-							<img src="https://www.tastingtable.com/img/gallery/breakfast-recipes/l-intro-1651937325.jpg" alt="Category Image" class="card-img-top">
-						}
-						<div class="card-body">
-							<p class="card-text category-name">@foodItem.Name</p>
-							<p class="card-text category-name">Price = @foodItem.Price $</p>
-							<div class="d-flex justify-content-between align-items-center btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">
-									<a class="nav-link" asp-controller="FoodItem" asp-action="ItemDetails" asp-route-id="@foodItem.FoodItemId">Details</a>
-								</button>
-								@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-								{
-									<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodItem" asp-action="Update" asp-route-foodItemId="@foodItem.FoodItemId">Edit</a></button>
-									<button type="button" class="btn btn-sm btn-outline-secondary"><a class="nav-link" asp-controller="FoodItem" asp-action="Delet" asp-route-foodItemId="@foodItem.FoodItemId" asp-route-categoryId="@foodItem.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Item')">Delete</a></button>
-								}
-							</div>
-						</div>
-					</div>
-				</div>
+						</td>
+					}
+
+					<td><img src="@item.ImageUrl" style="width:70px; height:50px;"/></td>
+
+					<td>@item.Description</td>
+
+					<td>
+						<a class="newCategoryButton" asp-controller="FoodItem" asp-action="Update" asp-route-foodItemId="@item.FoodItemId">Edit</a>
+					</td>
+					<td>
+						<a class="newCategoryButton" asp-controller="FoodItem" asp-action="Delet" asp-route-foodItemId="@item.FoodItemId" asp-route-categoryId="@item.FoodCategoryId" onclick="return confirm('Are You that Sure You Want To Delete This Item')">Delete</a>
+
+					</td>
+				</tr>
 			}
-		</div>
+		</tbody>
+	</table>
 	</div>
-</div>

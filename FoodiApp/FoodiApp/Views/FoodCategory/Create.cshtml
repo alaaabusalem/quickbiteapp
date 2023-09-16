@@ -17,7 +17,9 @@
                     <div class="col-md-12 form-group">
                         <label class="category-label">Category Name</label>
                             <input asp-for="@Model.Name" type="text" name="name" class="category-input" id="name" required>
-                    </div>
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+
+                        </div>
                 </div>
                 @*
            

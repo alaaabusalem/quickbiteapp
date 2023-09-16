@@ -21,7 +21,7 @@ namespace FoodiApp.Models.Services
             await container.CreateIfNotExistsAsync();
             BlobClient blob = container.GetBlobClient(file.FileName);
             using var stream = file.OpenReadStream();
-
+            
             BlobUploadOptions options = new BlobUploadOptions()
             {
                 HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
