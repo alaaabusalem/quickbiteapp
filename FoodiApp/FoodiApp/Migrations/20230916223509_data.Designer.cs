@@ -4,6 +4,7 @@ using FoodiApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodiApp.Migrations
 {
     [DbContext(typeof(FoodieDBContext))]
-    partial class FoodieDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230916223509_data")]
+    partial class data
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,16 +94,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52f927bc-e633-434a-b9f9-60b08d38046e",
+                            ConcurrencyStamp = "16f0320b-aa49-4263-821a-404d7617074b",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAECq9M84FQdOqDnFX5r4ka7ZfNBGGXjJMAa7m+kMv4rH4mFGc2e8wgH8c/Aomo3YrTw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED1+z5YKUDposNP3jYbIcyaZ1SMOhwv7LPbz7mAiYC4swsr3suzNRgn+VAaItBEQNg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e1e24ecf-cd36-4229-97f4-df1064d02887",
+                            SecurityStamp = "8f01b45d-e1fc-4dd5-ab80-67faa5fc04b2",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -198,6 +201,269 @@ namespace FoodiApp.Migrations
                     b.HasIndex("FoodCategoryId");
 
                     b.ToTable("FoodItems");
+
+                    b.HasData(
+                        new
+                        {
+                            FoodItemId = 1,
+                            Description = "Fluffy scrambled eggs served with toast",
+                            FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ScrambledEggs.jpg",
+                            IsAvaliabe = true,
+                            Name = "Scrambled Eggs",
+                            Price = 5.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 2,
+                            Description = "Stack of fluffy pancakes with syrup",
+                            FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/Pancake.jpg",
+                            IsAvaliabe = true,
+                            Name = "Pancakes",
+                            Price = 7.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 3,
+                            Description = "Scrambled eggs, bacon, and cheese wrapped in a tortilla",
+                            FoodCategoryId = 1,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/ClassicBreakfastBurrito.jpg",
+                            IsAvaliabe = true,
+                            Name = "Classic Breakfast Burrito",
+                            Price = 8.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 4,
+                            Description = "Chilled coffee served with ice",
+                            FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/IcedCoffee.jpg",
+                            IsAvaliabe = true,
+                            Name = "Iced Coffee",
+                            Price = 3.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 5,
+                            Description = "Blended fresh fruit with yogurt or juice",
+                            FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/FruitSmoothie.jpg",
+                            IsAvaliabe = true,
+                            Name = "Fruit Smoothie",
+                            Price = 4.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 6,
+                            Description = "Rich and creamy hot chocolate",
+                            FoodCategoryId = 2,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/HotChocolate.jpg",
+                            IsAvaliabe = true,
+                            Name = "Hot Chocolate",
+                            Price = 3.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 7,
+                            Description = "Juicy grilled shrimp with garlic butter",
+                            FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/GrilledShrimp.jpg",
+                            IsAvaliabe = true,
+                            Name = "Grilled Shrimp",
+                            Price = 12.99
+                        },
+                        new
+                        {
+                            FoodItemId = 8,
+                            Description = "Creamy lobster soup with a hint of sherry",
+                            FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/LobsterBisque.jpg",
+                            IsAvaliabe = true,
+                            Name = "Lobster Bisque",
+                            Price = 9.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 9,
+                            Description = "Assortment of seafood including shrimp, crab, and mussels",
+                            FoodCategoryId = 3,
+                            ImageUrl = "https://foodiappstaticfile.blob.core.windows.net/images/SeafoodPlatter.jpg",
+                            IsAvaliabe = true,
+                            Name = "Seafood Platter",
+                            Price = 22.989999999999998
+                        },
+                        new
+                        {
+                            FoodItemId = 10,
+                            Description = "Classic pizza with tomato, mozzarella, and basil",
+                            FoodCategoryId = 4,
+                            IsAvaliabe = true,
+                            Name = "Margherita Pizza",
+                            Price = 11.99
+                        },
+                        new
+                        {
+                            FoodItemId = 11,
+                            Description = "Pizza topped with pepperoni and melted cheese",
+                            FoodCategoryId = 4,
+                            IsAvaliabe = true,
+                            Name = "Pepperoni Pizza",
+                            Price = 13.99
+                        },
+                        new
+                        {
+                            FoodItemId = 12,
+                            Description = "Pizza with ham, pineapple, and tomato sauce",
+                            FoodCategoryId = 4,
+                            IsAvaliabe = true,
+                            Name = "Hawaiian Pizza",
+                            Price = 12.49
+                        },
+                        new
+                        {
+                            FoodItemId = 13,
+                            Description = "Spaghetti with eggs, cheese, pancetta, and black pepper",
+                            FoodCategoryId = 5,
+                            IsAvaliabe = true,
+                            Name = "Spaghetti Carbonara",
+                            Price = 14.99
+                        },
+                        new
+                        {
+                            FoodItemId = 14,
+                            Description = "Creamy fettuccine pasta with parmesan cheese",
+                            FoodCategoryId = 5,
+                            IsAvaliabe = true,
+                            Name = "Fettuccine Alfredo",
+                            Price = 13.49
+                        },
+                        new
+                        {
+                            FoodItemId = 15,
+                            Description = "Homemade ravioli stuffed with lobster meat and served in a creamy sauce",
+                            FoodCategoryId = 5,
+                            IsAvaliabe = true,
+                            Name = "Lobster Ravioli",
+                            Price = 18.989999999999998
+                        },
+                        new
+                        {
+                            FoodItemId = 16,
+                            Description = "Penne pasta with a spicy tomato sauce",
+                            FoodCategoryId = 5,
+                            IsAvaliabe = true,
+                            Name = "Penne Arrabbiata",
+                            Price = 11.99
+                        },
+                        new
+                        {
+                            FoodItemId = 17,
+                            Description = "Melted chocolate served with fruits and marshmallows for dipping",
+                            FoodCategoryId = 6,
+                            IsAvaliabe = true,
+                            Name = "Chocolate Fondue",
+                            Price = 9.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 18,
+                            Description = "Classic Italian dessert made with coffee and mascarpone cheese",
+                            FoodCategoryId = 6,
+                            IsAvaliabe = true,
+                            Name = "Tiramisu",
+                            Price = 7.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 19,
+                            Description = "Creamy cheesecake with a graham cracker crust",
+                            FoodCategoryId = 6,
+                            IsAvaliabe = true,
+                            Name = "New York Cheesecake",
+                            Price = 8.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 20,
+                            Description = "Refreshing fruit sorbet with assorted flavors",
+                            FoodCategoryId = 6,
+                            IsAvaliabe = true,
+                            Name = "Fruit Sorbet",
+                            Price = 6.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 21,
+                            Description = "Creamy mashed potatoes with roasted garlic",
+                            FoodCategoryId = 7,
+                            IsAvaliabe = true,
+                            Name = "Garlic Mashed Potatoes",
+                            Price = 4.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 22,
+                            Description = "Assorted vegetables roasted to perfection",
+                            FoodCategoryId = 7,
+                            IsAvaliabe = true,
+                            Name = "Roasted Vegetables",
+                            Price = 5.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 23,
+                            Description = "Crispy French fries drizzled with truffle oil",
+                            FoodCategoryId = 7,
+                            IsAvaliabe = true,
+                            Name = "Truffle Fries",
+                            Price = 6.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 24,
+                            Description = "Spinach cooked in a creamy sauce with garlic and parmesan",
+                            FoodCategoryId = 7,
+                            IsAvaliabe = true,
+                            Name = "Creamed Spinach",
+                            Price = 5.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 25,
+                            Description = "Classic chicken noodle soup with vegetables",
+                            FoodCategoryId = 8,
+                            IsAvaliabe = true,
+                            Name = "Chicken Noodle Soup",
+                            Price = 6.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 26,
+                            Description = "Creamy tomato soup with fresh basil",
+                            FoodCategoryId = 8,
+                            IsAvaliabe = true,
+                            Name = "Tomato Basil Soup",
+                            Price = 5.9900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 27,
+                            Description = "Rich and creamy clam chowder with bacon",
+                            FoodCategoryId = 8,
+                            IsAvaliabe = true,
+                            Name = "Clam Chowder",
+                            Price = 7.4900000000000002
+                        },
+                        new
+                        {
+                            FoodItemId = 28,
+                            Description = "Hearty vegetable minestrone soup with pasta",
+                            FoodCategoryId = 8,
+                            IsAvaliabe = true,
+                            Name = "Vegetable Minestrone",
+                            Price = 5.9900000000000002
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

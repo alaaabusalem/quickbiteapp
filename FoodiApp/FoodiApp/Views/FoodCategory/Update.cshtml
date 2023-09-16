@@ -1,23 +1,34 @@
 ﻿@model FoodCategory
 
 
-<div class="form-header-style">
-	<h3>Edit Food Category</h3>
+<div class="add-category-text">
+    <h3>Edit Food Category</h3>
 </div>
-<form asp-controller="FoodCategory" asp-action="Update" method="post" class="form-body">
-	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-	{
 
-	<div class="form-flex">
-		<div class="form-group form-group-style">
-			<lable class=" controle-lable lable-style"> Name</lable>
-			<input type="text" asp-for="@Model.Name" class="form-control">
-			<span asp-validation-for="@Model.Name" class="text-danger"></span>
-		</div>
-	</div>
 
-	<div class="text-center">
-		<button type="submit" class="btn btn-sm btn-outline-secondary mx-auto d-block">Update Category Name</button>
-	</div>
-	}
-</form>
+<div style="margin-bottom:30px;" class="container" data-aos="fade-up">
+
+
+    <div class="custom-form">
+        <form asp-controller="FoodCategory" asp-action="Update" method="post" method="post" role="form" class="food-category-form">
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="category-label">Category Name</label>
+                        <input asp-for="@Model.Name" type="text" name="name" class="category-input" id="name" required>
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+
+                    </div>
+                </div>
+                @*
+
+
+            *@
+                <div class="text-center">
+                    <button type="submit" class="add-category-button">Add Category</button>
+                </div>
+            }
+        </form>
+    </div>
+
