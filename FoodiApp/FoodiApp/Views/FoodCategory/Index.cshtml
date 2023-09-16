@@ -7,13 +7,13 @@
 {
 	<div class="container-lg">
 		<div class="d-flex flex-row justify-content-end mt-4 mb-4">
-			<a class="btn btn-primary rounded" asp-controller="FoodCategory" asp-action="Create">
+			<a style="border:double; padding:10px;" class="newCategoryButton" asp-controller="FoodCategory" asp-action="Create">
 				<span class="add-icon"><i class="fa-light fa-plus"></i></span>
 				New Category
 			</a>
 		</div>
-		<div class="d-flex flex-row justify-content-center">
-			<table class="table table-width table-light">
+		<div class="centered-table">
+			<table class="food-table">
 				<thead>
 					<tr>
 						<th scope="col">Name</th>
@@ -21,18 +21,18 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody class="table-secondary">
+				<tbody >
 					@foreach (var item in Model)
 					{
 						<tr>
 							<th scope="row">
-								<a class="link-underline-light" asp-controller="FoodItem" asp-action="Details" asp-route-id="@item.FoodCategoryId">@item.Name</a>
+								<a  asp-controller="FoodItem" asp-action="Details" asp-route-id="@item.FoodCategoryId">@item.Name</a>
 							</th>
 							<td>
-								<button type="button" class="btn btm-sm btn-outline-info border-top border-start border-end"><a class="nav-link" asp-controller="FoodCategory" asp-action="Update" asp-route-id="@item.FoodCategoryId">Edit</a></button>
+								<button class="FCbutton" type="button" ><a  asp-controller="FoodCategory" asp-action="Update" asp-route-id="@item.FoodCategoryId">Edit</a></button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-sm btn-outline-danger border-top border-start border-end"><a class="nav-link" asp-controller="FoodCategory" asp-action="Delete" asp-route-id="@item.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Food Category ?')">Delete</a></button>
+								<button class="FCbutton" type="button"><a asp-controller="FoodCategory" asp-action="Delete" asp-route-id="@item.FoodCategoryId" onclick="return confirm('Are You Sure You Want To Delete This Food Category ?')">Delete</a></button>
 							</td>
 						</tr>
 					}
@@ -41,4 +41,47 @@
 		</div>
 
 	</div>
+
+	<style>
+
+		
+
+		/* Center the table on the page */
+		.centered-table {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh; /* This will center the table vertically */
+		}
+
+		/* Style the table */
+		.food-table {
+			width: 80%; /* Adjust the width as needed */
+			border-collapse: collapse;
+			border: 2px double gold; /* Double border with gold color */
+			border-radius: 10px; /* Add border radius */
+			text-align: center; /* Center-align text */
+		}
+
+			.food-table th, .food-table td {
+				padding: 10px;
+				border: 2px double gold; /* Double border with gold color */
+			}
+
+			.food-table th {
+				background-color: #f2f2f2;
+			}
+
+		/* Style buttons */
+		button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+		}
+
+		/* Add more styles as needed */
+
+	</style>
 }
