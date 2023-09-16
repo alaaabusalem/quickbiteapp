@@ -10,7 +10,7 @@
 </div>
 
 
-<form method="Post" asp-controller="Auth" asp-action="SignUpAdmin" class="form-body">
+<form method="Post" asp-controller="Auth" asp-action="SignUpAdmin"  class="text-start">
 	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 	{
 		<partial name="_Regestration" />

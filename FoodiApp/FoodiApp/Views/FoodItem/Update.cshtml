@@ -5,6 +5,66 @@
 	var Categories = new SelectList(ViewBag.Categories, "FoodCategoryId", "Name");
 }
 
+<div class="add-category-text">
+	<h3>Update Food Item</h3>
+</div>
+<div style="margin-bottom:30px;" class="container" data-aos="fade-up">
+	<div class="custom-form">
+		<form method="Post" enctype="multipart/form-data" asp-controller="FoodItem" asp-action="Update" class="food-category-form">
+			@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+			{
+				<input type="hidden" asp-for="@Model.FoodItemId" class="form-control" placeholder="@Model.FoodItemId">
+				<input type="hidden" asp-for="@Model.ImageUrl" class="form-control" placeholder="@Model.ImageUrl">
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<lable class="category-label"> Name</lable>
+						<input type="text" asp-for="@Model.Name" class="category-input">
+						<span asp-validation-for="@Model.Name" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<lable class="category-label"> Description</lable>
+						<input type="text" asp-for="@Model.Description" class="category-input"></input>
+						<span asp-validation-for="@Model.Description" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<lable class="category-label"> Price</lable>
+						<input type="text" asp-for="@Model.Price" class="category-input">
+						<span asp-validation-for="@Model.Price" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<lable class="category-label">Category</lable>
+						<select asp-for="@Model.FoodCategoryId" asp-items="@Categories" class="category-input"></select>
+						<span asp-validation-for="@Model.Price" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-12 form-group">
+					@Html.CheckBoxFor(m=>m.IsAvaliabe)
+					<lable class="category-label">IsAvaliabe</lable>
+					<span asp-validation-for="@Model.IsAvaliabe" class="text-danger"></span>
+				</div>
+
+				<div class="col-md-12 form-group">
+					<label for="formFile" class="category-label">Image</label>
+					<input class="category-input" type="file" id="formFile" name="file">
+					<span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+
+				</div>
+				@*<div class="col-auto py-4 mx-4 d-none d-lg-block">
+			@if (Model.ImageUrl != null)
+			{
+			<img src="@Model.ImageFile.OpenReadStream()" alt="..." class=" food-item-image img-thumbnail rounded float-start">
+			}
+			</div>*@
+				<div class="form-group form-group-margin form-header-3">
+					<input type="submit" value="Update" class="add-category-button" />
+				</div>
+			}
+		</form>
+	</div>
+</div>
+@*
+
+
 <div class="form-header-style">
 	<h3>Update Food Item</h3>
 </div>
@@ -45,7 +105,7 @@
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Image</label>
 			<input class="form-control" type="file" id="formFile" name="file" data="@Model.ImageUrl">
-			
+
 
 		</div>
 		<div class="form-group form-group-margin form-header-3">
@@ -53,3 +113,4 @@
 		</div>
 	}
 </form>
+*@
