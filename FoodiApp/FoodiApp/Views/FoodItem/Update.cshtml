@@ -13,6 +13,7 @@
 	@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 	{
 		<input type="hidden" asp-for="@Model.FoodItemId" class="form-control" placeholder="@Model.FoodItemId">
+		<input type="hidden" asp-for="@Model.ImageUrl" class="form-control" placeholder="@Model.ImageUrl">
 
 		<div class="form-flex">
 			<div class="form-group form-group-style">
@@ -43,7 +44,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Image</label>
-			<input class="form-control" type="file" id="formFile" name="file">
+			<input class="form-control" type="file" id="formFile" name="file" data="@Model.ImageUrl">
 			
 
 		</div>
