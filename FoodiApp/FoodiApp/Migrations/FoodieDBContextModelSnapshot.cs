@@ -91,16 +91,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52f927bc-e633-434a-b9f9-60b08d38046e",
+                            ConcurrencyStamp = "f00b3beb-d2ec-4755-96b6-db0d42a3e309",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAECq9M84FQdOqDnFX5r4ka7ZfNBGGXjJMAa7m+kMv4rH4mFGc2e8wgH8c/Aomo3YrTw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPskJ1HZPt/aU2+whJJVkTsVD9wXRPlkc3eF1e99sL5fYsotRAJlxL4QUAaHd9PCSA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e1e24ecf-cd36-4229-97f4-df1064d02887",
+                            SecurityStamp = "76a2eea6-9603-4af4-a005-188e67705bc6",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
