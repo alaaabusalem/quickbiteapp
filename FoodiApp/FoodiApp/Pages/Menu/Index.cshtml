@@ -1,0 +1,21 @@
+﻿@page
+@model FoodiApp.Pages.Menu.IndexModel
+@{
+}
+<h1> Menu</h1>
+
+@foreach(var item in Model.foodCategories)
+{
+    <h3>@item.Name</h3>
+    if (item.foodItems != null)
+    {
+        @foreach(var dish in item.foodItems)
+        {
+            <p> @dish.Name</p>
+            <p> @dish.Description</p>
+         <img src="@dish.ImageUrl"/>
+         <p>@dish.Price</p>
+        }
+    }
+
+}

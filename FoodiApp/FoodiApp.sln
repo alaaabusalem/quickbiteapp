@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodiApp", "FoodiApp\FoodiApp.csproj", "{0D695406-F4D0-4F21-8779-5E15F6597D82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodiAppTest", "FoodiAppTest\FoodiAppTest.csproj", "{D9253AF5-A57A-494E-99F0-0D98CB59F1E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodiAppTest", "FoodiAppTest\FoodiAppTest.csproj", "{D9253AF5-A57A-494E-99F0-0D98CB59F1E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
