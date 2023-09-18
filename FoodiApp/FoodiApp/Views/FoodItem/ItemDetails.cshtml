@@ -63,11 +63,11 @@
 				<h3 class="mb-0 food-item-name">Name: @Model.Name</h3>
 				<div class="mb-1 food-item-price">Price = @Model.Price $</div>
 
-				@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+				@*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 				{
 					<div class="availability-box @((Model.IsAvaliabe) ? "availability-true" : "availability-false")"></div>
 					<span class="food-item-availability">@((Model.IsAvaliabe) ? "Available" : "Not Available")</span>
-				}
+				}*@
 				<p class="card-text mb-auto food-item-description">Description: @Model.Description</p>
 
 			</div>

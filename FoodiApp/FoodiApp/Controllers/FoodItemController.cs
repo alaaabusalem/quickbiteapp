@@ -41,18 +41,19 @@ namespace FoodiApp.Controllers
 			return View(foodItem);
 
 		}
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ItemDetails(int id)
+        {
 
-		/*[Authorize(Roles = "Admin")]
+            var foodItem = await _context.GetFoodItemDetails(id);
+            return View(foodItem);
+        }
+        /*
 
-		public async Task<IActionResult> ItemDetails(int id)
-		{
-
-			var foodItem = await _context.GetFoodItemDetails(id);
-			return View(foodItem);
-		}
+		
 
 		*/
-		[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
 
 		public async Task<IActionResult> Creat()
 		{
