@@ -1,21 +1,59 @@
 ﻿@page
 @model FoodiApp.Pages.Menu.IndexModel
 @{
+    Layout = "_Layout";
 }
-<h1> Menu</h1>
 
-@foreach(var item in Model.foodCategories)
+    <section id="menu" class="menu section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Menu</h2>
+          <p>Check Our Tasty Menu</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-flters">
+              <li data-filter="*" class="filter-active">All</li>
+             
+            </ul>
+          </div>
+        </div>
+
+        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+            @foreach(var item in Model.foodCategories)
 {
-    <h3>@item.Name</h3>
-    if (item.foodItems != null)
-    {
-        @foreach(var dish in item.foodItems)
-        {
-            <p> @dish.Name</p>
-            <p> @dish.Description</p>
-         <img src="@dish.ImageUrl"/>
-         <p>@dish.Price</p>
-        }
-    }
+              
+                 if (item.foodItems != null)
+            {
+            @foreach(var dish in item.foodItems)
+            {
 
-}
+                        <div  class="col-lg-6 menu-item ">
+                            <img src="@dish.ImageUrl" class="menu-img" alt="">
+                            <div class="menu-content">
+                                <a href="#">@dish.Name</a><span>@dish.Price   </span>
+                            </div>
+                            <div class="menu-ingredients">
+                               @dish.Description
+                               
+                            </div>
+                            <div>
+
+                           
+                            </div>
+                        </div>
+
+           
+            }
+            }
+         
+        }
+        </div>
+
+        </div>
+        </section>
+      
+
+
