@@ -10,5 +10,7 @@ namespace FoodiApp.Models.Interfaces
 		FoodCategory GetFoodCategory(int foodCategoryId);
 		CreatFoodCategoryDTO Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId);
 		void Delete(int foodCategoryId);
+		Task<List<FoodCategory>> GetMenu();
+
 	}
 }

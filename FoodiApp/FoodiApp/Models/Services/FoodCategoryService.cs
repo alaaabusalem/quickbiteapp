@@ -51,6 +51,12 @@ namespace FoodiApp.Models.Services
 			return foodCategory;
 		}
 
+		public async Task<List<FoodCategory>> GetMenu()
+		{
+			return await _DB.FoodCategories.Include(Category => Category.foodItems.Where(foodItem=> foodItem.IsAvaliabe==true))
+				.ToListAsync();
+		}
+
 		public CreatFoodCategoryDTO Update(CreatFoodCategoryDTO creatFoodCategoryDTO, int foodCategoryId)
 		{
 			var foodCategory = _DB.FoodCategories.Where(fc => fc.FoodCategoryId == foodCategoryId).FirstOrDefault();
