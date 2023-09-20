@@ -4,6 +4,8 @@ namespace FoodiApp.Models
 {
 	public class ApplicationUser : IdentityUser
 	{
+		//NP
 
+		public ShoppingCart? shoppingCart { get; set; }
 	}
 }

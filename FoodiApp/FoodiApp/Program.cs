@@ -35,6 +35,7 @@ builder.Services.AddTransient<IFoodCategory, FoodCategoryService>();
 builder.Services.AddTransient<IUser, UserService>();
 
 builder.Services.AddTransient<IFoodItems, FoodItemService>();
+builder.Services.AddTransient<IShoppingCart, ShoppingCartService>();
 
 
 builder.Services.AddAuthentication(
