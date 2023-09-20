@@ -11,10 +11,12 @@
 		public string Description { get; set; }
 		public double Price { get; set; }
 		public bool IsAvaliabe { get; set; }
-
-		//NP
 		public string? ImageUrl { get; set; }
 
+		//NP
+
 		public FoodCategory? foodCategory { get; set; }
+		public List<CartItem>? cartItems { get; set; }
+
 	}
 }

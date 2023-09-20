@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using FoodiApp.Data;
 using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -12,13 +13,16 @@ namespace FoodiApp.Models.Services
 		private UserManager<ApplicationUser> _userManager;
 
 		private SignInManager<ApplicationUser> _signManager;
+		private readonly FoodieDBContext _DB;
+
 		//private JwtTokenService tokenService;
 
 
-		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager)
+		public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signManager, FoodieDBContext DB)
 		{
 			_userManager = userManager;
 			_signManager = signManager;
+			_DB = DB;	
 			//tokenService = tokenservice;
 		}
 
@@ -29,13 +33,17 @@ namespace FoodiApp.Models.Services
 			{
 
 				var user = await _userManager.FindByNameAsync(loginDto.UserName);
+				var cart = await _DB.ShoppingCarts.AddAsync(new ShoppingCart
+				{
+					UserId = user.Id
+				});
 				return new UserDto()
 				{
 
 					UserName = user.UserName,
 					//Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(60))
 				};
-
+				
 			}
 			return null;
 
@@ -79,6 +87,9 @@ namespace FoodiApp.Models.Services
 			{
 				string Role = "client";
 				await _userManager.AddToRoleAsync(user, Role);
+				var cart= new ShoppingCart { UserId = user.Id };
+				var cartCreated = await _DB.ShoppingCarts.AddAsync(cart);
+				await _DB.SaveChangesAsync();
 				return new UserDto
 				{
 					UserName = user.UserName

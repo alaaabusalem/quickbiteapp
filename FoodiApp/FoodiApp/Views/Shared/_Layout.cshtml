@@ -73,6 +73,17 @@
 
 
 						</li>
+
+						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+						{
+						<li class="nav-item">
+
+								<a class="nav-link " asp-area="" asp-controller="ShoppingCarts" asp-action="Index" asp-route-userName=@_userManager.GetUserName(User)> <span class="visually-hidden">(current)</span>Cart</a>
+
+
+
+						</li>
+						}
 						<li class="nav-item">
 
 							<a class="nav-link " href="#about">About  <span class="visually-hidden">(current)</span> </a>
