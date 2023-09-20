@@ -21,5 +21,9 @@ namespace FoodiApp.Controllers
              await _shoppingCart.AddItemToShoppingCart(userName, foodItemId);
             return RedirectToAction("Index");
         }
+        public IActionResult test()
+        {
+            return View();
+        }
     }
 }
