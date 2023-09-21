@@ -13,7 +13,7 @@ namespace FoodiApp.Models.Interfaces
 		Task<UserDto> Authenticate(LoginDto loginDto);
 		Task Logout();
 		Task<UserDto> GetUser(string name);
-
+		Task<UserDto> GetUserById(string Id);
 
 	}
 }

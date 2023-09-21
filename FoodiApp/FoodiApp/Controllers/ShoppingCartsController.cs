@@ -1,4 +1,5 @@
-﻿using FoodiApp.Models.Interfaces;
+﻿using FoodiApp.Models;
+using FoodiApp.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodiApp.Controllers
@@ -13,12 +14,16 @@ namespace FoodiApp.Controllers
         public async Task<IActionResult> Index(string userName)
 		{
 			var cartItems = await _shoppingCart.GetShoppingCartItems(userName);
-		    return View(cartItems);	
+            ViewBag.Total = _shoppingCart.GetTotal(cartItems);
+
+			return View(cartItems);	
 		}
 
         public async Task<IActionResult> AddFoodItemToCart(string userName,int foodItemId)
+
         {
-             await _shoppingCart.AddItemToShoppingCart(userName, foodItemId);
+            var shoppingCart = await _shoppingCart.GetshoppingCartByUserName(userName);
+             await _shoppingCart.AddItemToShoppingCart(shoppingCart, foodItemId);
            
             return RedirectToAction("Index","Menu" ,new {userName = userName});
         }
@@ -26,5 +31,14 @@ namespace FoodiApp.Controllers
         {
             return View();
         }
-    }
+		public async Task<IActionResult> IncrementCartIrem(int ShoppingCartId, int foodItemId)
+
+		{
+			var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(ShoppingCartId);
+			await _shoppingCart.AddItemToShoppingCart(shoppingCart, foodItemId);
+            var user= await _shoppingCart.GetUserByUserId(shoppingCart.UserId);    
+			return RedirectToAction("Index", new { userName = user.UserName });
+		}
+
+	}
 }

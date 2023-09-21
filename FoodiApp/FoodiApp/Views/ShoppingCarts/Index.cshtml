@@ -20,8 +20,6 @@
 						<th scope="col">Price</th>
 						<th scope="col">Quantity</th>
 						<th scope="col">SubTotal</th>
-
-						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -32,13 +30,24 @@
 							<tr>
 								<td>@cartitem.foodItem.Name</td>
 								<td>@cartitem.foodItem.Price</td>
-								<td>@cartitem.Quantity</td>
+								<td>@cartitem.Quantity <a asp-area="" asp-controller="ShoppingCarts" asp-action="IncrementCartIrem" asp-route-ShoppingCartId="@cartitem.ShoppingCartId" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-plus" style="color: #948f00;"></i></a></td>
 								<td>@(cartitem.foodItem.Price * cartitem.Quantity)</td>
 
 							</tr>
 						}}
 											
 					</tbody>
+					<tfoot>
+					<tr class="table-warning">
+						<td>Total</td>
+						
+						<td>@ViewBag.Total</td>
+						<td>
+						</td>
+						<td></td>
+					
+					</tr>
+					</tfoot>
 			</table>
 		</div>
 	
