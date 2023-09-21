@@ -12,14 +12,15 @@ namespace FoodiApp.Controllers
         }
         public async Task<IActionResult> Index(string userName)
 		{
-			var cart = await _shoppingCart.GetShoppingCartItems(userName);
-		    return View(cart);	
+			var cartItems = await _shoppingCart.GetShoppingCartItems(userName);
+		    return View(cartItems);	
 		}
 
         public async Task<IActionResult> AddFoodItemToCart(string userName,int foodItemId)
         {
              await _shoppingCart.AddItemToShoppingCart(userName, foodItemId);
-            return RedirectToAction("Index");
+           
+            return RedirectToAction("Index","Menu" ,new {userName = userName});
         }
         public IActionResult test()
         {

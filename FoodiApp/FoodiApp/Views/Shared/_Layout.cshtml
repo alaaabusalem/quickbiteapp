@@ -66,13 +66,26 @@
 							</ul>
 
 						</div>
-						<li class="nav-item">
+						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+						{
+							<li class="nav-item">
 
-							<a class="nav-link " asp-page="/Menu/Index">Menu  <span class="visually-hidden">(current)</span> </a>
+								<a class="nav-link " asp-page="/Menu/Index" asp-route-userName=@_userManager.GetUserName(User)>Menu  <span class="visually-hidden">(current)</span> </a>
 
 
 
-						</li>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+
+								<a class="nav-link " asp-page="/Menu/Index" asp-route-userName="">Menu  <span class="visually-hidden">(current)</span> </a>
+
+
+
+							</li>
+						}
 
 						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
 						{
