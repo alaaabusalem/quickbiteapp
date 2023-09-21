@@ -1,4 +1,5 @@
 ﻿using FoodiApp.Data;
+using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,9 @@ namespace FoodiApp.Models.Services
 			_DB = foodieDBContext;
 			_UserService = userService;
 		}
-		public async Task AddItemToShoppingCart(string userName,int FoodId)
+		public async Task AddItemToShoppingCart(ShoppingCart shoppingCart, int FoodId)
 		{
 
-			var shoppingCart = await GetshoppingCartId(userName);
 
                 if (shoppingCart != null)
 				{
@@ -51,7 +51,7 @@ namespace FoodiApp.Models.Services
 
 		public async Task<List<CartItem>> GetShoppingCartItems(String UserName)
 		{
-			var shoppingcart = await GetshoppingCartId(UserName);
+			var shoppingcart = await GetshoppingCartByUserName(UserName);
 			if (shoppingcart != null)
 			{
 			var CartItems = await  _DB.CartItems.Include(cartItem=> cartItem.foodItem).Where(cartitem=> cartitem.ShoppingCartId== shoppingcart.ShoppingCartId).ToListAsync();
@@ -65,7 +65,7 @@ namespace FoodiApp.Models.Services
 			
 			return null;
 		}
-		public async Task <ShoppingCart> GetshoppingCartId(String userName)
+		public async Task <ShoppingCart> GetshoppingCartByUserName(String userName)
 		{
 			var user = await _UserService.GetUser(userName);
 			if (user != null)
@@ -78,5 +78,38 @@ namespace FoodiApp.Models.Services
 			return null;
 		}
 
-    }
+		public float GetTotal(List<CartItem> cartItems)
+		{
+			if (cartItems != null)
+			{
+				float Total = 0;
+				foreach (CartItem cartItem in cartItems)
+				{
+					Total = (float)(Total + (cartItem.Quantity * cartItem.foodItem.Price));
+
+				}
+				return Total;
+			}
+			return 0;
+		}
+
+		public async Task<ShoppingCart> GetshoppingCartByCartID(int ShoppingCartId)
+		{
+			var ShoppingCart= await _DB.ShoppingCarts.Include(shoppingCart => shoppingCart.cartItems)
+					.FirstAsync(shoppingCart => shoppingCart.ShoppingCartId == ShoppingCartId);
+			if (ShoppingCart != null) return ShoppingCart;
+			return null;
+		}
+
+		public async Task<UserDto> GetUserByUserId(String Id)
+		{
+			var user = await _UserService.GetUserById(Id);
+			if (user != null)
+			{
+				
+				return user;
+			}
+			return null;
+		}
+	}
 }

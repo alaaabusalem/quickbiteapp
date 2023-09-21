@@ -67,7 +67,23 @@ namespace FoodiApp.Models.Services
 				Id= user.Id
 			};
 		}
+		public async Task<UserDto> GetUserById(string Id)
 
+		{
+			//var claim = await tokenService.GetUserFromToken(Token);
+			var user = await _userManager.FindByIdAsync(Id);
+			if (user == null)
+			{
+
+				return null;
+			}
+			await _signManager.SignInAsync(user, true);
+			return new UserDto()
+			{
+				UserName = user.UserName,
+				Id = user.Id
+			};
+		}
 		public async Task Logout()
 		{
 			await _signManager.SignOutAsync();
