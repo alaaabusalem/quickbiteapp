@@ -64,7 +64,7 @@ namespace FoodiApp.Models.Services
 			return new UserDto()
 			{
 				UserName = user.UserName,
-
+				Id= user.Id
 			};
 		}
 

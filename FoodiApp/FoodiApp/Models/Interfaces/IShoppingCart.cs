@@ -2,7 +2,8 @@
 {
 	public interface IShoppingCart
 	{
-		Task<ShoppingCart> GetShoppingCartItems(String UserName);
+		Task<List<CartItem>> GetShoppingCartItems(String UserName);
 		Task AddItemToShoppingCart(string userName,int FoodId);
+		Task<ShoppingCart> GetshoppingCartId(String userName);
 	}
 }

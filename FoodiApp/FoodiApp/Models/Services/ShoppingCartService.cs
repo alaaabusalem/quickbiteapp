@@ -16,11 +16,10 @@ namespace FoodiApp.Models.Services
 		}
 		public async Task AddItemToShoppingCart(string userName,int FoodId)
 		{
-			var user = await _UserService.GetUser(userName);
-			if (user != null)
-			{
-				var shoppingCart = await _DB.ShoppingCarts.FirstAsync(shoppingCart=> shoppingCart.UserId==user.Id);
-				if (shoppingCart != null)
+
+			var shoppingCart = await GetshoppingCartId(userName);
+
+                if (shoppingCart != null)
 				{
 					var foodItem = await _DB.FoodItems.FindAsync(FoodId);
 					if (foodItem != null)
@@ -41,26 +40,43 @@ namespace FoodiApp.Models.Services
 						{
 							shoppingItem.Quantity = shoppingItem.Quantity + 1;
 						}
-						_DB.SaveChanges();
+						await _DB.SaveChangesAsync();
 
 					}
 				}
-			}
+			
 
 		
 		}
 
-		public async Task<ShoppingCart> GetShoppingCartItems(String UserName)
+		public async Task<List<CartItem>> GetShoppingCartItems(String UserName)
 		{
-			var user = await _UserService.GetUser(UserName);
-			if (user != null)
+			var shoppingcart = await GetshoppingCartId(UserName);
+			if (shoppingcart != null)
 			{
-			var Cart = _DB.ShoppingCarts.Include(Cart => Cart.cartItems).FirstOrDefault(cart => cart.UserId == user.Id);
+			var CartItems = await  _DB.CartItems.Include(cartItem=> cartItem.foodItem).Where(cartitem=> cartitem.ShoppingCartId== shoppingcart.ShoppingCartId).ToListAsync();
+
+				foreach (var cartItem in CartItems)
+				{
+					cartItem.foodItem = await _DB.FoodItems.FindAsync(cartItem.FoodItemId);
+				}
+				return CartItems;
 			}
 			
 			return null;
 		}
+		public async Task <ShoppingCart> GetshoppingCartId(String userName)
+		{
+			var user = await _UserService.GetUser(userName);
+			if (user != null)
+			{
+				var shoppingCart = await _DB.ShoppingCarts.Include(shoppingCart=>shoppingCart.cartItems)
+					.FirstAsync(shoppingCart => shoppingCart.UserId == user.Id);
+				
+				return shoppingCart;
+			}
+			return null;
+		}
 
-
-	}
+    }
 }
