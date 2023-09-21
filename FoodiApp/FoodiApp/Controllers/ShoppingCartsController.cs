@@ -39,6 +39,24 @@ namespace FoodiApp.Controllers
             var user= await _shoppingCart.GetUserByUserId(shoppingCart.UserId);    
 			return RedirectToAction("Index", new { userName = user.UserName });
 		}
+        public async Task<IActionResult> DeleteCartItem(int shoppingCartId, int foodItemId)
+        {
+            await _shoppingCart.DeleteCartItem(shoppingCartId, foodItemId);
+            var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(shoppingCartId);
+            var user = await _shoppingCart.GetUserByUserId(shoppingCart.UserId);
+
+            return RedirectToAction("Index", new { userName = user.UserName });
+        }
+		public async Task<IActionResult> DecrementCartItem(int ShoppingCartId, int foodItemId)
+		{
+			await _shoppingCart.DecrementCartItem(ShoppingCartId, foodItemId);
+			var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(ShoppingCartId);
+			var user = await _shoppingCart.GetUserByUserId(shoppingCart.UserId);
+
+			return RedirectToAction("Index", new { userName = user.UserName });
+		}
+
+
 
 	}
 }

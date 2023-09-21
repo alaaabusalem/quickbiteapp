@@ -37,13 +37,13 @@
                             <div class="menu-content">
                                 <a href="#">@dish.Name</a><span>@dish.Price $  </span>
                             </div>
-                            <div class="menu-ingredients">
+                            <div style="margin-bottom:20px;" class="menu-ingredients">
                                @dish.Description
                             </div>
                             <div>
                                 <center>
                                     @if(Model.menuVm.userName != null){
-                                    <a class="book-a-table-btn" asp-area="" asp-controller="ShoppingCarts" asp-action="AddFoodItemToCart" asp-route-userName="@Model.menuVm.userName" asp-route-foodItemId="@dish.FoodItemId">Add To Cart</a>
+                                    <a  class="book-a-table-btn" asp-area="" asp-controller="ShoppingCarts" asp-action="AddFoodItemToCart" asp-route-userName="@Model.menuVm.userName" asp-route-foodItemId="@dish.FoodItemId">Add To Cart</a>
                                     }
                                 </center>
                                 
@@ -60,15 +60,4 @@
         </div>
         </section>
       
-        <style>
-    button[type="submit"] {
-        background: #cda45e;
-        border: 0;
-        align-content:center;
-        margin-top:10px;
-        color: #fff;
-        transition: 0.4s;
-        border-radius: 50px;
-    }
-        </style>
-
+    
