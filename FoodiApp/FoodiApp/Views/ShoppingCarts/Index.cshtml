@@ -20,7 +20,7 @@
 						<th scope="col">Price</th>
 						<th scope="col">Quantity</th>
 						<th scope="col">SubTotal</th>
-						<th scope="col"></th>
+						<th scope="col">Delete Item</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,15 +30,26 @@
 							<tr>
 								<td>@cartitem.foodItem.Name</td>
 								<td>@cartitem.foodItem.Price</td>
-								<td>@cartitem.Quantity <a asp-area="" asp-controller="ShoppingCarts" asp-action="IncrementCartIrem" asp-route-ShoppingCartId="@cartitem.ShoppingCartId" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-plus" style="color: #948f00;"></i></a></td>
+								<td><a asp-area="" asp-controller="ShoppingCarts" asp-action="DecrementCartItem" asp-route-ShoppingCartId="@cartitem.ShoppingCartId" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-minus" style="border:solid; margin:5px; padding:5px; color: #948f00;"></i></a>   @cartitem.Quantity   <a asp-area="" asp-controller="ShoppingCarts" asp-action="IncrementCartIrem" asp-route-ShoppingCartId="@cartitem.ShoppingCartId" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-plus" style="border:solid; margin:5px; padding:5px; color: #948f00;"></i></a></td>
 								<td>@(cartitem.foodItem.Price * cartitem.Quantity)</td>
+								<td>
+						
+										<a onclick="return confirm('Are You Sure that You Want To Delete This Item From Your Cart ?')" asp-area="" asp-controller="ShoppingCarts" asp-action="DeleteCartItem" asp-route-ShoppingCartId="@cartitem.ShoppingCartId" asp-route-foodItemId="@cartitem.foodItem.FoodItemId">
+										<i class="fa-solid fa-trash" style="margin-left:28px ;color: #948f00;"></i>
+
+										</a>
+								
+									
+
+							</td>
+
 
 							</tr>
 						}}
 											
 					</tbody>
 					<tfoot>
-					<tr class="table-warning">
+					<tr class="table-warning" >
 						<td>Total</td>
 						
 						<td>@ViewBag.Total</td>

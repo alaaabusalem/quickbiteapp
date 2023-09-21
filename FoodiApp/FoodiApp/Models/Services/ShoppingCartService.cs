@@ -111,5 +111,45 @@ namespace FoodiApp.Models.Services
 			}
 			return null;
 		}
+
+        public async Task DeleteCartItem(int shoppingCartId, int foodItemId)
+        {
+            var shoppingCart = await _DB.ShoppingCarts
+                .Include(sc => sc.cartItems)
+                .FirstOrDefaultAsync(sc => sc.ShoppingCartId == shoppingCartId);
+
+            if (shoppingCart != null)
+            {
+                var cartItemToRemove = shoppingCart.cartItems.FirstOrDefault(ci => ci.FoodItemId == foodItemId);
+
+                if (cartItemToRemove != null)
+                {
+                    _DB.CartItems.Remove(cartItemToRemove);
+                    await _DB.SaveChangesAsync();
+                }
+            }
+        }
+
+		public async Task DecrementCartItem(int shoppingCartId, int foodItemId)
+		{
+			var shoppingCart = await GetshoppingCartByCartID(shoppingCartId);
+
+			if (shoppingCart != null)
+			{
+				var cartItem = shoppingCart.cartItems.FirstOrDefault(ci => ci.FoodItemId == foodItemId);
+
+				if (cartItem != null && cartItem.Quantity > 1)
+				{
+					cartItem.Quantity -= 1;
+					await _DB.SaveChangesAsync(); 
+				}
+				else if (cartItem != null && cartItem.Quantity == 1)
+				{
+				
+					await DeleteCartItem(shoppingCartId, foodItemId);
+				}
+			}
+		}
+
 	}
 }

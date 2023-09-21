@@ -5,10 +5,15 @@ namespace FoodiApp.Models.Interfaces
 	public interface IShoppingCart
 	{
 		Task<List<CartItem>> GetShoppingCartItems(String UserName);
-		Task AddItemToShoppingCart(ShoppingCart shoppingCart,int FoodId);
+		Task AddItemToShoppingCart(ShoppingCart shoppingCart, int FoodId);
 		Task<ShoppingCart> GetshoppingCartByUserName(String userName);
-		 float GetTotal(List<CartItem> cartItems);
+		float GetTotal(List<CartItem> cartItems);
 		Task<ShoppingCart> GetshoppingCartByCartID(int ShoppingCartId);
-		  Task<UserDto> GetUserByUserId(String Id);
+		Task<UserDto> GetUserByUserId(String Id);
+
+		Task DeleteCartItem(int shoppingCartId, int foodItemId);
+
+		Task DecrementCartItem(int shoppingCartId, int foodItemId);
+
 	}
 }
