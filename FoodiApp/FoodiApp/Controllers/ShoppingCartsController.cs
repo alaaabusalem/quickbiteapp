@@ -1,6 +1,8 @@
 ﻿using FoodiApp.Models;
 using FoodiApp.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FoodiApp.Controllers
 {
@@ -11,49 +13,60 @@ namespace FoodiApp.Controllers
         {
             _shoppingCart = shoppingCart;
         }
-        public async Task<IActionResult> Index(string userName)
+        [Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> Index()
 		{
-			var cartItems = await _shoppingCart.GetShoppingCartItems(userName);
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            var cartItems = await _shoppingCart.GetShoppingCartItems(userId);
             ViewBag.Total = _shoppingCart.GetTotal(cartItems);
 
 			return View(cartItems);	
 		}
 
-        public async Task<IActionResult> AddFoodItemToCart(string userName,int foodItemId)
+        [Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> AddFoodItemToCart(int foodItemId)
 
         {
-            var shoppingCart = await _shoppingCart.GetshoppingCartByUserName(userName);
-             await _shoppingCart.AddItemToShoppingCart(shoppingCart, foodItemId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+
+            
+             await _shoppingCart.AddItemToShoppingCart(userId, foodItemId);
            
-            return RedirectToAction("Index","Menu" ,new {userName = userName});
+            return RedirectToAction("Index","Menu");
         }
-        public IActionResult test()
-        {
-            return View();
-        }
-		public async Task<IActionResult> IncrementCartIrem(int ShoppingCartId, int foodItemId)
+       
+        [Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> IncrementCartIrem(int foodItemId)
 
 		{
-			var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(ShoppingCartId);
-			await _shoppingCart.AddItemToShoppingCart(shoppingCart, foodItemId);
-            var user= await _shoppingCart.GetUserByUserId(shoppingCart.UserId);    
-			return RedirectToAction("Index", new { userName = user.UserName });
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+
+           
+			await _shoppingCart.AddItemToShoppingCart(userId, foodItemId);
+               
+			return RedirectToAction("Index");
 		}
-        public async Task<IActionResult> DeleteCartItem(int shoppingCartId, int foodItemId)
+        [Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> DeleteCartItem( int foodItemId)
         {
-            await _shoppingCart.DeleteCartItem(shoppingCartId, foodItemId);
-            var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(shoppingCartId);
-            var user = await _shoppingCart.GetUserByUserId(shoppingCart.UserId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            await _shoppingCart.DeleteCartItem(userId, foodItemId);
 
-            return RedirectToAction("Index", new { userName = user.UserName });
+            return RedirectToAction("Index");
         }
-		public async Task<IActionResult> DecrementCartItem(int ShoppingCartId, int foodItemId)
-		{
-			await _shoppingCart.DecrementCartItem(ShoppingCartId, foodItemId);
-			var shoppingCart = await _shoppingCart.GetshoppingCartByCartID(ShoppingCartId);
-			var user = await _shoppingCart.GetUserByUserId(shoppingCart.UserId);
+        [Authorize(Roles = "Client")]
 
-			return RedirectToAction("Index", new { userName = user.UserName });
+        public async Task<IActionResult> DecrementCartItem(int foodItemId)
+		{
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            await _shoppingCart.DecrementCartItem(userId, foodItemId);
+
+			return RedirectToAction("Index");
 		}
 
 

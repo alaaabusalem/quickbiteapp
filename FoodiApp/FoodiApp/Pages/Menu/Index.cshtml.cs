@@ -9,26 +9,22 @@ namespace FoodiApp.Pages.Menu
     public class IndexModel : PageModel
     {
         private readonly IFoodCategory _foodCategory;
-        public MenuVm menuVm { get; set; }  
-        //public List<FoodCategory> foodCategories { get; set; }
+       // public MenuVm menuVm { get; set; }  
+        public List<FoodCategory> foodCategories { get; set; }
         public IndexModel(IFoodCategory foodCategory)
         {
             _foodCategory = foodCategory;
-            menuVm = new MenuVm();
+            //menuVm = new MenuVm();
+            foodCategories = new List<FoodCategory>();  
         }
-        public async Task OnGet(string userName)
+        public async Task OnGet()
         {
-			menuVm.foodCategories = await _foodCategory.GetMenu();
-			menuVm.userName = userName; 
+		 foodCategories = await _foodCategory.GetMenu();
+			
 
 			 Page();
         }
     }
 
-    public class MenuVm
-    {
-		public List<FoodCategory> foodCategories { get; set; }
-
-		public string userName;
-	}
+ 
 }
