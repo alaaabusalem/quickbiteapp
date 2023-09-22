@@ -24,7 +24,7 @@
         </div>
 
         <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-            @foreach(var category in Model.menuVm.foodCategories)
+            @foreach(var category in Model.foodCategories)
 {
 
                 if (category.foodItems != null)
@@ -42,8 +42,9 @@
                             </div>
                             <div>
                                 <center>
-                                    @if(Model.menuVm.userName != null){
-                                    <a  class="book-a-table-btn" asp-area="" asp-controller="ShoppingCarts" asp-action="AddFoodItemToCart" asp-route-userName="@Model.menuVm.userName" asp-route-foodItemId="@dish.FoodItemId">Add To Cart</a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+                                    {
+                                    <a  class="book-a-table-btn" asp-area="" asp-controller="ShoppingCarts" asp-action="AddFoodItemToCart"  asp-route-foodItemId="@dish.FoodItemId">Add To Cart</a>
                                     }
                                 </center>
                                 
