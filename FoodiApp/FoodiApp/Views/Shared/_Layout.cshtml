@@ -87,16 +87,6 @@
 							</li>
 						}
 
-						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
-						{
-						<li class="nav-item">
-
-								<a class="nav-link " asp-area="" asp-controller="ShoppingCarts" asp-action="Index" asp-route-userName=@_userManager.GetUserName(User)> <span class="visually-hidden">(current)</span>Cart</a>
-
-
-
-						</li>
-						}
 						<li class="nav-item">
 
 							<a class="nav-link " href="#about">About  <span class="visually-hidden">(current)</span> </a>
@@ -116,11 +106,20 @@
 
 						<a class="book-a-table-btn" asp-area="" asp-controller="Auth" asp-action="Login" style="padding:10px 20px 10px 20px ;">Login </a>
 
-							
 
 						}
 						else
 						{
+						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+						{
+							<a class="nav-link " asp-area="" asp-controller="ShoppingCarts" asp-action="Index" style="color:wheat">
+								@await Component.InvokeAsync("CartItemsCount")
+								<i class="fa-sharp fa-solid fa-cart-shopping" style="color:wheat;margin-right:30px;"></i>
+
+							</a>
+
+
+						}
 							<div class="dropdown">
 								<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 									@_userManager.GetUserName(User)
@@ -131,6 +130,7 @@
 									</li>
 								</ul>
 							</div>
+						
 
 						}
 					
