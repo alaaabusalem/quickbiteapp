@@ -28,6 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
 //builder.Services.AddScoped<JwtTokenService>();
 
+builder.Services.AddScoped<IEmail, EmailService>();
+
 builder.Services.AddTransient<IUpload, UploadService>();
 
 builder.Services.AddTransient<IFoodCategory, FoodCategoryService>();
