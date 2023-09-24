@@ -112,9 +112,9 @@
 						{
 						@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
 						{
-							<a class="nav-link " asp-area="" asp-controller="ShoppingCarts" asp-action="Index" style="color:wheat">
-								@await Component.InvokeAsync("CartItemsCount")
-								<i class="fa-sharp fa-solid fa-cart-shopping" style="color:wheat;margin-right:30px;"></i>
+							<a class="nav-link " asp-area="" asp-controller="ShoppingCarts" asp-action="Index" style="color:wheat;margin-right:30px;">
+
+								<i class="fa-sharp fa-solid fa-cart-shopping" style="color:wheat;">@await Component.InvokeAsync("CartItemsCount")</i>
 
 							</a>
 
