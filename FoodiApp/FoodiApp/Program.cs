@@ -38,7 +38,7 @@ builder.Services.AddTransient<IUser, UserService>();
 
 builder.Services.AddTransient<IFoodItems, FoodItemService>();
 builder.Services.AddTransient<IShoppingCart, ShoppingCartService>();
-builder.Services.AddTransient<IEmail, EmailService>();
+//builder.Services.AddTransient<IEmail, EmailService>();
 
 builder.Services.AddAuthentication(
 //options =>
