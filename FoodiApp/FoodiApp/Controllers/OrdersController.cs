@@ -64,5 +64,14 @@ namespace FoodiApp.Controllers
 
 
         }
+
+        public IActionResult ConfirmPayment()
+        {
+            return View();
+        }
+        public IActionResult FailedPayment()
+        {
+            return View();
+        }
     }
 }
