@@ -47,7 +47,10 @@ namespace FoodiApp.Controllers
             };
             return View(summaryDTO);
         }
-        public async Task<IActionResult> PaymentProcces()
+
+		[Authorize(Roles = "Client")]
+
+		public async Task<IActionResult> PaymentProcces()
         {
 			StripeConfiguration.ApiKey = _configuration.GetSection("StripeSettings:SecretKey").Get<string>();
 
@@ -81,6 +84,23 @@ namespace FoodiApp.Controllers
 
 				options.LineItems.Add(sessionLineItem);
 			}
+
+			// adding delivery price
+			var sessionLineItemDelivery = new SessionLineItemOptions
+			{
+				PriceData = new SessionLineItemPriceDataOptions()
+				{
+					UnitAmount = (long)(10 * 100), // 20.50 => 2050
+					Currency = "usd",
+					ProductData = new SessionLineItemPriceDataProductDataOptions()
+					{
+						Name = "delivery"
+					}
+				},
+				Quantity=1
+			};
+
+			options.LineItems.Add(sessionLineItemDelivery);
 
 			var service = new SessionService();
 			var session = service.Create(options);
@@ -136,7 +156,9 @@ namespace FoodiApp.Controllers
 
         }
 
-        public async Task<IActionResult> ConfirmPayment()
+		[Authorize(Roles = "Client")]
+
+		public async Task<IActionResult> ConfirmPayment()
         {
 			var sessionId = TempData["sessionId"].ToString();
 
@@ -157,7 +179,10 @@ namespace FoodiApp.Controllers
 			return Content("Not completed suucessfully");
 			
         }
-        public IActionResult FailedPayment()
+
+		[Authorize(Roles = "Client")]
+
+		public IActionResult FailedPayment()
         {
             return View();
         }
