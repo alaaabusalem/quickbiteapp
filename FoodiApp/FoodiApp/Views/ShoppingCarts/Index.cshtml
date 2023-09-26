@@ -73,7 +73,7 @@
                                          </div>
                                               
                                         <td class="align-middle">@cartitem.foodItem.Price</td>
-                                        <td><a asp-area="" asp-controller="ShoppingCarts" asp-action="DecrementCartItem" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-minus" style="border:solid; margin:5px; padding:5px; color: #cda45e;"></i></a>   @cartitem.Quantity   <a asp-area="" asp-controller="ShoppingCarts" asp-action="IncrementCartIrem" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-plus" style="border:solid; margin:5px; padding:5px; color: #cda45e;"></i></a></td>
+                                        <td><a asp-area="" asp-controller="ShoppingCarts" asp-action="DecrementCartItem" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-minus" style=" margin:5px; padding:5px; color: #cda45e;"></i></a>   @cartitem.Quantity   <a asp-area="" asp-controller="ShoppingCarts" asp-action="IncrementCartIrem" asp-route-foodItemId="@cartitem.foodItem.FoodItemId"><i class="fa-solid fa-plus" style=" margin:5px; padding:5px; color: #cda45e;"></i></a></td>
                                         <td>@(cartitem.foodItem.Price * cartitem.Quantity)</td>
                                         <td>
 
@@ -108,7 +108,7 @@
                                 </h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Delivery</h6>
                                 <h6 class="font-weight-medium">10 $</h6>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                 <h5 class="font-weight-bold">@totalWithDel</h5>
                             </div>
                             <button  style="background-color:#cda45e;" class="btn btn-block btn-primary my-3 py-3">
-                                <a asp-area="" asp-controller="Orders" asp-action="Summary">Proceed To Checkout</a>
+                                <a style="text-decoration:none;color:white;" asp-area="" asp-controller="Orders" asp-action="Summary">Proceed To Checkout</a>
                             </button>
                         </div>
                       
