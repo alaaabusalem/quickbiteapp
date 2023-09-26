@@ -64,7 +64,10 @@ namespace FoodiApp.Models.Services
 			return new UserDto()
 			{
 				UserName = user.UserName,
-				Id= user.Id
+				Id= user.Id,
+				Email=user.Email,
+				Phone = user.PhoneNumber
+
 			};
 		}
 		public async Task<UserDto> GetUserById(string Id)
@@ -81,8 +84,10 @@ namespace FoodiApp.Models.Services
 			return new UserDto()
 			{
 				UserName = user.UserName,
-				Id = user.Id
-			};
+				Id = user.Id,
+                Email = user.Email,
+				Phone= user.PhoneNumber
+            };
 		}
 		public async Task Logout()
 		{
