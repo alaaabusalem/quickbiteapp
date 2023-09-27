@@ -218,5 +218,46 @@ namespace FoodiApp.Controllers
 			ViewBag.Total = await _order.GetTotal(orderId);
 			return View(order);
 		}
+        [Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> ClientGetOrdersInProcess()
+        {
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+
+			var orders = await _order.GetOrdersInProcess();
+            List<Order> list = new List<Order>();
+             
+            foreach(var order in orders) 
+            {
+                if (order.UserId== userId && order.IsDeliverd==false)
+                {
+                    list.Add(order);
+                }
+            }
+            return View(list);
+
+        }
+		[Authorize(Roles = "Client")]
+		public async Task<IActionResult> ClientGetDeliveredOrders()
+		{
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+
+			var orders = await _order.GetOrdersInProcess();
+			List<Order> list = new List<Order>();
+
+			foreach (var order in orders)
+			{
+				if (order.UserId == userId  )
+				{
+					if (order.IsDeliverd == true)
+					{
+						list.Add(order);
+					}
+				}
+			}
+			return View(list);
+
+		}
+		
 	}
 }
