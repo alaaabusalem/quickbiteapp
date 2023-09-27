@@ -47,5 +47,21 @@ namespace FoodiApp.Models.Services
 			var orders = await _context.Orders.Where(order=> order.IsDeliverd==false).OrderByDescending(order=>order.Date).ToListAsync();
 			return orders;
 		}
+
+		public async Task< float> GetTotal(int orderId)
+		{
+			float Total = 0;
+			var order = await GetOrderInProcessById(orderId);
+			if(order.OrderItems!= null)
+			{
+				foreach(var item in order.OrderItems)
+				{
+					Total = (float)(Total + (item.Quantity * item.Price));
+
+				}
+
+			}
+			return Total;
+		}
 	}
 }
