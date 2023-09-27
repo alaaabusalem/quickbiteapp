@@ -17,6 +17,8 @@
 
 		public FoodCategory? foodCategory { get; set; }
 		public List<CartItem>? cartItems { get; set; }
+		public List<OrderItem>? orderItems { get; set; }
+
 
 	}
 }

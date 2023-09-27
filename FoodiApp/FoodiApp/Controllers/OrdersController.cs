@@ -15,13 +15,15 @@ namespace FoodiApp.Controllers
         private readonly IShoppingCart _shoppingCart;
         private readonly IUser _user;
         private readonly IConfiguration _configuration;
+		private readonly IOrder _order;
 
-		public OrdersController(IEmail emailservice, IShoppingCart shoppingCart, IUser user, IConfiguration configuration)
+		public OrdersController(IEmail emailservice, IShoppingCart shoppingCart, IUser user, IConfiguration configuration, IOrder order)
         {
             emailService= emailservice;	
 			_shoppingCart= shoppingCart;	
             _user= user; 
             _configuration= configuration;
+            _order= order;
         }
         [Authorize(Roles = "Client")]
 
@@ -171,6 +173,15 @@ namespace FoodiApp.Controllers
 				if (session.PaymentStatus.ToLower() == "paid")
 				{
 					var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+                    var CartItems = await _shoppingCart.GetShoppingCartItems(userId);
+                    Order order = new Order() { 
+                    UserId=userId,
+                    sessionId=sessionId,
+                    Date= DateTime.Now, 
+                    IsDeliverd=false,   
+                    };
+                    var newOrder = await _order.Create(order, CartItems);
+                    await _shoppingCart.EmptyTheCart(userId);
 					await SendOrderEmail(userId);
 					return View();
 				}
@@ -186,5 +197,17 @@ namespace FoodiApp.Controllers
         {
             return View();
         }
-    }
+
+		public async Task<IActionResult> AdminGetOrdersInProcess()
+		{
+            var orders = await _order.GetOrdersInProcess();
+            return View(orders);
+		}
+
+		public async Task<IActionResult> AdminGetOrderInProcessDetails(int orderId)
+		{
+			var order = await _order.GetOrderInProcessById(orderId);
+			return View(order);
+		}
+	}
 }
