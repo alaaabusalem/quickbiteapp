@@ -140,7 +140,8 @@ namespace FoodiApp.Controllers
                     {
                         Textmsg = Textmsg + $"Name: {item.foodItem.Name} => Price: {item.foodItem.Price}$ => Quantity: {item.Quantity} => subTotal: {item.foodItem.Price * item.Quantity} \r\n";
                     }
-                    Textmsg = Textmsg + $" ===>>>> Total price :{totalprice}$ \r\n \r\n Quick Bites Team";
+                    totalprice = totalprice + 10;
+					Textmsg = Textmsg + $" Delivary => 10$ \r\n ===>>>> Total price :{totalprice}$ \r\n \r\n Quick Bites Team";
                     await emailService.SendEmailAsync(emailValue, subject, Textmsg);
 
                     ////// administrator
@@ -180,9 +181,11 @@ namespace FoodiApp.Controllers
                     Date= DateTime.Now, 
                     IsDeliverd=false,   
                     };
-                    var newOrder = await _order.Create(order, CartItems);
-                    await _shoppingCart.EmptyTheCart(userId);
+
+					var newOrder = await _order.Create(order, CartItems);
 					await SendOrderEmail(userId);
+
+					await _shoppingCart.EmptyTheCart(userId);
 					return View();
 				}
 			}
@@ -198,15 +201,21 @@ namespace FoodiApp.Controllers
             return View();
         }
 
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> AdminGetOrdersInProcess()
 		{
             var orders = await _order.GetOrdersInProcess();
             return View(orders);
 		}
 
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> AdminGetOrderInProcessDetails(int orderId)
 		{
 			var order = await _order.GetOrderInProcessById(orderId);
+           
+			ViewBag.Total = await _order.GetTotal(orderId);
 			return View(order);
 		}
 	}

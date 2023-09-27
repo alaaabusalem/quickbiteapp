@@ -8,6 +8,7 @@ namespace FoodiApp.Models.Interfaces
 		Task<List<Order>> GetOrdersInProcess();
 
 		Task<Order> GetOrderInProcessById(int orderId);
+		Task <float> GetTotal(int orderId);
 
 	}
 
