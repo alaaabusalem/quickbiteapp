@@ -15,6 +15,7 @@ namespace FoodiApp.Models.Interfaces
         Task DeleteCartItem(string userId, int foodItemId);
 
         Task DecrementCartItem(string userId, int foodItemId);
+		Task EmptyTheCart(string userId);
 
 	}
 }

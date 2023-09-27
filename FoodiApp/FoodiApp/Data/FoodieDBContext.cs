@@ -26,6 +26,14 @@ namespace FoodiApp.Data
 		   .HasOne<ShoppingCart>(user => user.shoppingCart)
 		   .WithOne(shoppingCart => shoppingCart.ApplicationUser)
 		   .HasForeignKey<ShoppingCart>(shoppingCart => shoppingCart.UserId);
+            // Order user relation
+			modelBuilder.Entity<ApplicationUser>()
+	       .HasMany<Order>(user => user.Orders)
+	       .WithOne(order => order.User)
+	       .HasForeignKey(order => order.UserId);
+			// orderItems
+			modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.OrderId, oi.FoodItemId });
+
 
 			modelBuilder.Entity<FoodCategory>().HasData(
                        new FoodCategory { FoodCategoryId = 1, Name = "Breakfast All Day" },
@@ -215,5 +223,9 @@ namespace FoodiApp.Data
 		public DbSet<FoodItem> FoodItems { get; set; }
 		public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 		public DbSet<CartItem> CartItems { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderItem> OrderItems { get; set; }
+
+
 	}
 }

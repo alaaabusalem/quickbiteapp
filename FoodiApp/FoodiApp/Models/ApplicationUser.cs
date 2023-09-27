@@ -7,5 +7,7 @@ namespace FoodiApp.Models
 		//NP
 
 		public ShoppingCart? shoppingCart { get; set; }
+		public List<Order>? Orders { get; set; }
+
 	}
 }

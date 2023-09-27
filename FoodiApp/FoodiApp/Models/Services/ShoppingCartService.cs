@@ -128,6 +128,18 @@ namespace FoodiApp.Models.Services
 			}
 		}
 
-     
-    }
+		public async Task EmptyTheCart(string userId)
+		{
+			var cartItems = await GetshoppingCartByUserId(userId);
+			if (cartItems.cartItems != null)
+			{
+				foreach(var cartItem in cartItems.cartItems)
+				{
+					_DB.CartItems.Remove(cartItem);
+					
+				}
+				await _DB.SaveChangesAsync();
+			}
+		}
+	}
 }
