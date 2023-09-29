@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
+using FoodiApp.Models;
 using FoodiApp.Models.DTOs;
 using FoodiApp.Models.Interfaces;
+using FoodiApp.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
@@ -100,5 +102,20 @@ namespace FoodiApp.Controllers
 			HttpContext.Response.Cookies.Delete("name");
 			return RedirectToAction("Index", "Home");
 		}
-	}
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> UserProfile()
+        {
+            var  userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
+            var user = await _context.GetUserById(userId);
+            return View(user);
+
+        }
+
+
+        
+
+     
+
+
+    }
 }
