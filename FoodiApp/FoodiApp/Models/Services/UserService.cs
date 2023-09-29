@@ -22,7 +22,7 @@ namespace FoodiApp.Models.Services
 		{
 			_userManager = userManager;
 			_signManager = signManager;
-			_DB = DB;	
+			_DB = DB;
 			//tokenService = tokenservice;
 		}
 
@@ -43,7 +43,7 @@ namespace FoodiApp.Models.Services
 					UserName = user.UserName,
 					//Token = await tokenService.GetToken(user, System.TimeSpan.FromMinutes(60))
 				};
-				
+
 			}
 			return null;
 
@@ -64,8 +64,8 @@ namespace FoodiApp.Models.Services
 			return new UserDto()
 			{
 				UserName = user.UserName,
-				Id= user.Id,
-				Email=user.Email,
+				Id = user.Id,
+				Email = user.Email,
 				Phone = user.PhoneNumber
 
 			};
@@ -85,9 +85,9 @@ namespace FoodiApp.Models.Services
 			{
 				UserName = user.UserName,
 				Id = user.Id,
-                Email = user.Email,
-				Phone= user.PhoneNumber
-            };
+				Email = user.Email,
+				Phone = user.PhoneNumber
+			};
 		}
 		public async Task Logout()
 		{
@@ -108,7 +108,7 @@ namespace FoodiApp.Models.Services
 			{
 				string Role = "client";
 				await _userManager.AddToRoleAsync(user, Role);
-				var cart= new ShoppingCart { UserId = user.Id };
+				var cart = new ShoppingCart { UserId = user.Id };
 				var cartCreated = await _DB.ShoppingCarts.AddAsync(cart);
 				await _DB.SaveChangesAsync();
 				return new UserDto
@@ -151,5 +151,7 @@ namespace FoodiApp.Models.Services
 
 		}
 
-	}
-}
+       
+    }
+        }
+

@@ -1,0 +1,92 @@
+﻿@model UserDto
+
+
+<section style="background-color: #1a1814;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+               
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <center>
+                            <div style="width: 150px; height: 150px; background-color: #cda45e; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 44px; color: #fff;">@(Model.UserName.Length >= 2 ? Model.UserName.Substring(0, 2) : Model.UserName)</span>
+                            </div>
+                        </center>
+                      
+
+
+                        <h5 class="my-3">@Model.UserName</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-dark"><a asp-controller="Auth" asp-action="Logout">Logout</a></button>
+                            <button style="margin-left:10px;" type="button" class="btn btn-danger"><a>Delete Account</a></button>
+
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@Model.UserName</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </div>
+                            <div class="d-flex" style="display:flex; justify-content:space-between; ">
+                               
+                               
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@Model.Email</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </div>
+                          
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">
+                                    
+                                    @Model.Phone</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <a "><i class="fa-regular fa-pen-to-square"></i></a>
+                            </div>
+                           
+
+                        </div>
+                   
+                      
+                        <hr>
+                      
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
