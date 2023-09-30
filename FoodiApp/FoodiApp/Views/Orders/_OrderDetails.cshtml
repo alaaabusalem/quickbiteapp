@@ -1,0 +1,75 @@
+﻿@model Order
+<div class="container mt-5 mb-5">
+<div class="col-12 d-flex flex- row justify-content-between align-items-center">
+	<div class="col-12 col-lg-5 offset-lg-1">
+		<h4 class="d-flex justify-content-between align-items-center mb-3">
+			<span style="color: wheat;">Order Summary:</span>
+		</h4>
+		<ul class="list-group mb-3">
+			@foreach (var item in Model.OrderItems)
+			{
+				<li class="list-group-item d-flex justify-content-between  style=" background-color:black;"">
+					<div>
+						<h6 class="my-0">@item.foodItem.Name</h6>
+						<small class="text-muted">Quantity: @item.Quantity</small>
+					</div>
+					<span class="text-muted">@((item.foodItem.Price * item.Quantity).ToString("c")) </span>
+				</li>
+			}
+			<li class="list-group-item d-flex justify-content-between bg-light">
+				<small style="color: black; font-weight:bolder;">Delivary (USD)</small>
+				<strong style="color:black"> 10$</strong>
+			</li>
+			<li class="list-group-item d-flex justify-content-between bg-light">
+				<small style="color: black; font-weight:bolder;">Total (USD)</small>
+				<strong style="color: black;font-weight:bolder;">@((ViewBag.Total + 10.00).ToString("c"))</strong>
+			</li>
+		</ul>
+	</div>
+
+	<div class="col-12 col-lg-5 offset-lg-1">
+		<h4 class="d-flex justify-content-between align-items-center mb-3">
+			<span style="color: wheat;">User Information:</span>
+		</h4>
+		<ul class="list-group mb-3">
+
+			<li class="list-group-item d-flex justify-content-between  style=" background-color:black;"">
+				<div>
+					<h6 class="my-0">Name</h6>
+
+				</div>
+				<span class="text-muted">@Model.User.UserName</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between  style=" background-color:black;"">
+				<div>
+					<h6 class="my-0">Email</h6>
+
+				</div>
+				<span class="text-muted">@Model.User.Email</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between  style=" background-color:black;"">
+				<div>
+					<h6 class="my-0">Phone Number</h6>
+
+				</div>
+				<span class="text-muted">@Model.User.PhoneNumber</span>
+			</li>
+
+
+		</ul>
+	</div>
+	@if(Model.IsDeliverd==false){
+
+			<form class="d-flex flex-column justify-content-between align-items-center mt-2" asp-controller="Orders" asp-action="AdminGetOrderInProcessDetails" asp-route-OrderId="@Model.OrderId" asp-route-isDeliverd="@Model.IsDeliverd" method="post" class="food-category-form">
+				<div class=" container-sm col-md-12 form-group d-flex flex-row justify-content-center  align-items-center">
+					<div >	@Html.CheckBoxFor(m=>m.IsDeliverd) </div>
+				<lable class="category-label">Done & Deliverd</lable>
+				<span asp-validation-for="@Model.IsDeliverd" class="text-danger"></span>
+			</div>
+			<div class="form-group form-group-margin form-header-3">
+				<input type="submit" value="Update" class="add-category-button" />
+			</div>
+		</form>
+		}
+</div>
+</div>

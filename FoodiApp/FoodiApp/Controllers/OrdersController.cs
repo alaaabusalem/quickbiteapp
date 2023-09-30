@@ -211,14 +211,46 @@ namespace FoodiApp.Controllers
 
 		[Authorize(Roles = "Admin")]
 
+		public async Task<IActionResult> AdminGetDeliverdsOrders()
+		{
+			var orders = await _order.GetDeliverdOrders();
+			return View(orders);
+		}
+
+		[Authorize(Roles = "Admin")]
+
+		public async Task<IActionResult> AdminGetDeliveredOrderDetails(int orderId)
+		{
+			var order = await _order.GetOrdersById(orderId);
+
+			ViewBag.Total = await _order.GetTotal(orderId);
+			return View(order);
+		}
+		[Authorize(Roles = "Admin")]
+
 		public async Task<IActionResult> AdminGetOrderInProcessDetails(int orderId)
 		{
-			var order = await _order.GetOrderInProcessById(orderId);
+			var order = await _order.GetOrdersById(orderId);
            
 			ViewBag.Total = await _order.GetTotal(orderId);
 			return View(order);
 		}
-        [Authorize(Roles = "Client")]
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+
+		public async Task<IActionResult> AdminGetOrderInProcessDetails(int OrderId, bool isDeliverd)
+		{
+			var order = await _order.GetOrdersById(OrderId);
+			if(order !=null && isDeliverd == true)
+			{
+				await _order.UpdateOrderStatus(order);
+			}
+			//ViewBag.Total = await _order.GetTotal(orderId);
+			return RedirectToAction("AdminGetOrdersInProcess");
+		}
+
+		[Authorize(Roles = "Client")]
 
         public async Task<IActionResult> ClientGetOrdersInProcess()
         {

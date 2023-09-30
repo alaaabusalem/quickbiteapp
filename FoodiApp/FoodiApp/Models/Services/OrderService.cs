@@ -32,12 +32,18 @@ namespace FoodiApp.Models.Services
 			return order;
 		}
 
-		public async Task<Order> GetOrderInProcessById(int orderId)
+		public async Task<List<Order>> GetDeliverdOrders()
+		{
+			var orders = await _context.Orders.Where(order => order.IsDeliverd == true).OrderByDescending(order => order.Date).ToListAsync();
+			return orders;
+		}
+
+		public async Task<Order> GetOrdersById(int orderId)
 		{
 			var order = await _context.Orders.Include(order=>order.User)
 				.Include(order=> order.OrderItems)
 				.ThenInclude(orderItem=> orderItem.foodItem)
-				.FirstOrDefaultAsync(order => order.OrderId == orderId && order.IsDeliverd == false);
+				.FirstOrDefaultAsync(order => order.OrderId == orderId);
 			if (order == null) return null;
 			return order;
 		}
@@ -51,7 +57,7 @@ namespace FoodiApp.Models.Services
 		public async Task< float> GetTotal(int orderId)
 		{
 			float Total = 0;
-			var order = await GetOrderInProcessById(orderId);
+			var order = await GetOrdersById(orderId);
 			if(order.OrderItems!= null)
 			{
 				foreach(var item in order.OrderItems)
@@ -62,6 +68,17 @@ namespace FoodiApp.Models.Services
 
 			}
 			return Total;
+		}
+
+		public async Task UpdateOrderStatus(Order order)
+		{
+			var orderToUpdate = await _context.Orders.FindAsync(order.OrderId);
+			if (orderToUpdate != null)
+			{
+				orderToUpdate.IsDeliverd = true;
+				_context.Entry(orderToUpdate).State = EntityState.Modified;
+				await _context.SaveChangesAsync();
+			}
 		}
 	}
 }
