@@ -274,7 +274,7 @@ namespace FoodiApp.Controllers
 		{
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the user's ID
 
-			var orders = await _order.GetOrdersInProcess();
+			var orders = await _order.GetDeliverdOrders();
 			List<Order> list = new List<Order>();
 
 			foreach (var order in orders)
