@@ -7,8 +7,10 @@ namespace FoodiApp.Models.Interfaces
 		Task<Order> Create(Order order, List<CartItem> cartItems);
 		Task<List<Order>> GetOrdersInProcess();
 
-		Task<Order> GetOrderInProcessById(int orderId);
+		Task<Order> GetOrdersById(int orderId);
 		Task <float> GetTotal(int orderId);
+		Task<List<Order>> GetDeliverdOrders();
+		Task UpdateOrderStatus(Order order);
 
 	}
 

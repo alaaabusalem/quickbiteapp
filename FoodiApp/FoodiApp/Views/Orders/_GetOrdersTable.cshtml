@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Order>
+
+<div class="container-lg mb-5 mt-5">
+
+	<div class="">
+		<table class="table table-dark table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Order ID</th>
+					<th scope="col">Order Session ID</th>
+					<th scope="col"> Date</th>
+					<th scope="col">Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var order in Model)
+				{
+					<tr>
+						<th scope="row">
+							@order.OrderId
+						</th>
+						<td>
+							@order.sessionId
+						</td>
+						
+						<td>
+							@order.Date
+						</td>
+			
+						<td>
+							@if (order.IsDeliverd)
+							{
+								<a class="newCategoryButton" asp-controller="Orders" asp-action="AdminGetDeliveredOrderDetails" asp-route-orderId="@order.OrderId">Details</a>
+
+							
+							}
+							else{
+							<a class="newCategoryButton" asp-controller="Orders" asp-action="AdminGetOrderInProcessDetails" asp-route-orderId="@order.OrderId">Details</a>
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
