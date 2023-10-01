@@ -1,0 +1,94 @@
+﻿@model Order
+
+<section class="h-100 h-custom" >
+  <div class="container  h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card border-top border-bottom border-3" style="border-color: #cda45e !important;">
+          <div class="card-body p-5">
+
+            
+              <p class="lead fw-bold " style="color: #cda45e;">Order Details</p>
+
+            <div class="row">
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Date</p>
+                <p>@Model.Date</p>
+              </div>
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Order No.</p>
+                <p>@Model.OrderId</p>
+              </div>
+            </div>
+            <p class="lead fw-bold " style="color: #cda45e;">Order Items</p>
+            <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+              <div class="row">
+           
+                        @foreach(var item in Model.OrderItems)
+                        {
+                              
+                
+                 
+            
+                <div class="col-md-8 col-lg-9" style="display:flex; justify-content:space-between; margin-bottom:8px;  ">
+                     <img style="border-radius:40px;"  src="@item.foodItem.ImageUrl" width="80px" height="80px" he alt="@item.foodItem.Name"/>
+                     <div style="text-align:right;">
+                                            <p style="text-align:center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">@item.foodItem.Name</p>
+                                            <p>@item.foodItem.Price $</p>
+
+                                        </div>
+                                      
+
+
+                    
+                </div>
+                               
+                                        <p> Quantity => @item.Quantity</p>
+                                 
+               
+            <hr />
+                        }
+                         
+             
+            </div>
+       
+            </div>
+            <br />
+            <div >
+
+                       <div style="display:flex; justify-content:space-between;">
+                                <p class="lead fw-bold " style="color: #cda45e;">@Model.OrderItems.Count  Items </p>
+                                <p class="lead fw-bold " style="color: #cda45e;">Total=> @ViewBag.Total $ </p>
+
+                            </div>
+                              <div style="display:flex; justify-content:space-between;">
+                                <p class="lead fw-bold " style="color: #cda45e;">Status</p>
+                                
+                                    @if(Model.IsDeliverd == true){
+                                    <p class="lead fw-bold " style="color: #cda45e;">Delivered</p>
+                                }
+                                else
+                                {
+                                    <p class="lead fw-bold " style="color: #cda45e;">In Process</p>
+                                }
+
+                               
+
+                            </div>  <div style="display:flex; justify-content:space-between;">
+                                <p class="lead fw-bold " style="color: #cda45e;">Total With Delivery</p>
+                                <p class="lead fw-bold " style="color: #cda45e;">@((ViewBag.Total + 10.00).ToString("c"))</p>
+
+                            </div>
+                        
+            </div>
+
+           
+
+        
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>

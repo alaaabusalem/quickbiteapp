@@ -144,7 +144,7 @@
 
 
 						}
-							<div class="dropdown">
+							@*<div class="dropdown">
 								<button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 									@_userManager.GetUserName(User)
 								</button>
@@ -153,7 +153,17 @@
 										<a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="Logout">Logout<span class="visually-hidden">(current)</span> </a>
 									</li>
 								</ul>
-							</div>
+							</div>*@
+						<div class="dropdown" style="margin-right:30px;">
+							<a href="#"><span style="font-size:20px;">@_userManager.GetUserName(User)</span> <i class="bi bi-chevron-down"></i></a>
+							<ul style="text-align:center;">
+								@if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+						{
+								<li><a asp-area="" asp-controller="Auth" asp-action="UserProfile">User Profile</a></li>
+						}
+								<li><a asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a></li>
+							</ul>
+						</div>
 						
 
 						}

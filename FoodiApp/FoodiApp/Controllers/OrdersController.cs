@@ -290,6 +290,14 @@ namespace FoodiApp.Controllers
 			return View(list);
 
 		}
-		
+		[Authorize(Roles = "Client")]
+		public async Task<IActionResult> ClientGetOrderDetails(int orderId)
+		{
+			var order = await _order.GetOrdersById(orderId);
+
+			ViewBag.Total = await _order.GetTotal(orderId);
+			return View(order);
+		}
+
 	}
 }
