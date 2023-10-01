@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodiApp.Migrations
 {
     [DbContext(typeof(FoodieDBContext))]
-    [Migration("20230927035036_orderRelationAndTables")]
-    partial class orderRelationAndTables
+    [Migration("20231001171340_finialforpublish")]
+    partial class finialforpublish
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,16 +94,16 @@ namespace FoodiApp.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "89b2e4f3-832e-4054-8619-eb0c99a219a8",
+                            ConcurrencyStamp = "20991baf-63cf-43b5-8084-3063751908e0",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE9fK97ZwIAuu2Et0bEtB/vMcrJLnHYSpDSgDrt2Xz7e3lzRaqttLX65v4eJYpsPyw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPykBdv+Vopdv4m+05GaQrgDBMKeyAlLr3T0EoYK/noP/qktiZdoddplRJgUvn+iNQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dd963ef8-421a-45be-84e1-c78af9d1e196",
+                            SecurityStamp = "61ebeb80-cdef-4b0d-841d-f3cc9563f4d8",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

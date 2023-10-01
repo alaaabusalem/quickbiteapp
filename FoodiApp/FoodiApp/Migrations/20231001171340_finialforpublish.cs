@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FoodiApp.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class finialforpublish : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -172,6 +172,46 @@ namespace FoodiApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    sessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeliverd = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.ShoppingCartId);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FoodItems",
                 columns: table => new
                 {
@@ -195,6 +235,57 @@ namespace FoodiApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    FoodItemId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => new { x.ShoppingCartId, x.FoodItemId });
+                    table.ForeignKey(
+                        name: "FK_CartItems_FoodItems_FoodItemId",
+                        column: x => x.FoodItemId,
+                        principalTable: "FoodItems",
+                        principalColumn: "FoodItemId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "ShoppingCartId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    FoodItemId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => new { x.OrderId, x.FoodItemId });
+                    table.ForeignKey(
+                        name: "FK_OrderItems_FoodItems_FoodItemId",
+                        column: x => x.FoodItemId,
+                        principalTable: "FoodItems",
+                        principalColumn: "FoodItemId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -207,7 +298,7 @@ namespace FoodiApp.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "f00b3beb-d2ec-4755-96b6-db0d42a3e309", "admin@example.com", true, false, null, "admin@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEPskJ1HZPt/aU2+whJJVkTsVD9wXRPlkc3eF1e99sL5fYsotRAJlxL4QUAaHd9PCSA==", "1234567890", false, "76a2eea6-9603-4af4-a005-188e67705bc6", false, "admin" });
+                values: new object[] { "1", 0, "20991baf-63cf-43b5-8084-3063751908e0", "admin@example.com", true, false, null, "admin@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEPykBdv+Vopdv4m+05GaQrgDBMKeyAlLr3T0EoYK/noP/qktiZdoddplRJgUvn+iNQ==", "1234567890", false, "61ebeb80-cdef-4b0d-841d-f3cc9563f4d8", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "FoodCategories",
@@ -228,6 +319,24 @@ namespace FoodiApp.Migrations
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "admin", "1" });
+
+            migrationBuilder.InsertData(
+                table: "FoodItems",
+                columns: new[] { "FoodItemId", "Description", "FoodCategoryId", "ImageUrl", "IsAvaliabe", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, "Fluffy scrambled eggs served with toast", 1, "https://foodiappstaticfile.blob.core.windows.net/images/ScrambledEggs.jpg", true, "Scrambled Eggs", 5.9900000000000002 },
+                    { 2, "Stack of fluffy pancakes with syrup", 1, "https://foodiappstaticfile.blob.core.windows.net/images/Pancake.jpg", true, "Pancakes", 7.4900000000000002 },
+                    { 3, "Scrambled eggs, bacon, and cheese wrapped in a tortilla", 1, "https://foodiappstaticfile.blob.core.windows.net/images/ClassicBreakfastBurrito.jpg", true, "Classic Breakfast Burrito", 8.9900000000000002 },
+                    { 4, "Chilled coffee served with ice", 2, "https://foodiappstaticfile.blob.core.windows.net/images/IcedCoffee.jpg", true, "Iced Coffee", 3.9900000000000002 },
+                    { 5, "Blended fresh fruit with yogurt or juice", 2, "https://foodiappstaticfile.blob.core.windows.net/images/FruitSmoothie.jpg", true, "Fruit Smoothie", 4.4900000000000002 },
+                    { 6, "Rich and creamy hot chocolate", 2, "https://foodiappstaticfile.blob.core.windows.net/images/HotChocolate.jpg", true, "Hot Chocolate", 3.4900000000000002 },
+                    { 7, "Juicy grilled shrimp with garlic butter", 3, "https://foodiappstaticfile.blob.core.windows.net/images/GrilledShrimp.jpg", true, "Grilled Shrimp", 12.99 },
+                    { 8, "Creamy lobster soup with a hint of sherry", 3, "https://foodiappstaticfile.blob.core.windows.net/images/LobsterBisque.jpg", true, "Lobster Bisque", 9.9900000000000002 },
+                    { 9, "Assortment of seafood including shrimp, crab, and mussels", 3, "https://foodiappstaticfile.blob.core.windows.net/images/SeafoodPlatter.jpg", true, "Seafood Platter", 22.989999999999998 },
+                    { 10, "Classic pizza with tomato, mozzarella, and basil", 4, null, true, "Margherita Pizza", 11.99 },
+                    { 11, "Pizza topped with pepperoni and melted cheese", 4, null, true, "Pepperoni Pizza", 13.99 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -269,9 +378,31 @@ namespace FoodiApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartItems_FoodItemId",
+                table: "CartItems",
+                column: "FoodItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FoodItems_FoodCategoryId",
                 table: "FoodItems",
                 column: "FoodCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_FoodItemId",
+                table: "OrderItems",
+                column: "FoodItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_UserId",
+                table: "ShoppingCarts",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
         }
 
         /// <inheritdoc />
@@ -293,16 +424,28 @@ namespace FoodiApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "FoodItems");
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "ShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "FoodItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "FoodCategories");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

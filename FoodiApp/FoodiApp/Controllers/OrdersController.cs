@@ -56,8 +56,8 @@ namespace FoodiApp.Controllers
         {
 			StripeConfiguration.ApiKey = _configuration.GetSection("StripeSettings:SecretKey").Get<string>();
 
-			var domain = "https://localhost:7238/";
-
+			//var domain = "https://localhost:7238/";
+			var domain = "https://quickfoodiapp20231001201422.azurewebsites.net/";
 			var options = new SessionCreateOptions
 			{
 				SuccessUrl = domain + "Orders/ConfirmPayment",
